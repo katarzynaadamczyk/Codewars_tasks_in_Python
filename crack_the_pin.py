@@ -1,6 +1,12 @@
+import hashlib
+
 def crack(hash):
-  # G00D LUCK
-  pass
+    for i in range(100000):
+        str2hash = str(i).zfill(5)
+        result = hashlib.md5(str2hash.encode())
+        if result.hexdigest() == hash:
+            return str2hash
+    return None
 
 def main():
     out = crack('827ccb0eea8a706c4c34a16891f84e7b')
