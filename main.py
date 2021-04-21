@@ -1,17 +1,12 @@
-def add_shift(letter, shift):
-    if letter.islower():
-        return chr(ord('a') + (ord(letter) + shift - ord('a')) % 26)
-    else:
-        return chr(ord('A') + (ord(letter) + shift - ord('A')) % 26)
-
-
 def encode_str(strng, shift):
     # getting an encoded string
     pom = strng[0].lower()
-    pom += add_shift(pom, shift) 
+    pom += chr(ord('a') + (ord(pom) + shift - ord('a')) % 26)
     for i in strng:
-        if i.isalpha():
-            i = add_shift(i, shift)
+        if i.islower():
+            i = chr(ord('a') + (ord(i) + shift - ord('a')) % 26)
+        elif i.isupper():
+            i = chr(ord('A') + (ord(i) + shift - ord('A')) % 26)
         pom += i
 
     # dividing the message for runners
@@ -21,11 +16,14 @@ def encode_str(strng, shift):
         fixed_l = len(pom) // runners
     else:
         fixed_l = len(pom) // runners + 1
+
     for i in range(runners - 1):
         ret.append(pom[0:fixed_l])
         pom = pom[fixed_l:]
+
     if pom:
         ret.append(pom)
+
     return ret
 
 
