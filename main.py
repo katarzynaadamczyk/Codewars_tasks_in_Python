@@ -29,24 +29,47 @@ def encode_str(strng, shift):
 
 
 def decode(arr):
-    #your code
-    pass
+    # merging the message and getting the shift
+    message = ''
+    for i in arr:
+        message += i
+    shift = ord(message[1]) - ord(message[0])
+    if shift < 0:
+        shift += 26
+    message = message[2:]
+
+    # actual decoding
+    ret = ''
+    for i in message:
+        if i.islower():
+            tmp = ord(i) - shift
+            if tmp < ord('a'):
+                i = chr(ord('z') + tmp - ord('a') + 1)
+            else:
+                i = chr(tmp)
+        elif i.isupper():
+            tmp = ord(i) - shift
+            if tmp < ord('A'):
+                i = chr(ord('Z') + tmp - ord('A') + 1)
+            else:
+                i = chr(tmp)
+        ret += i
+
+    return ret
 
 def main():
     dec = encode_str('I love you', 2)
-    print(len('I love you'))
     print(dec)
     print(decode(dec))
     dec = encode_str('I should have known that you would have a perfect answer for me!!!', 1)
-    print(len('I should have known that you would have a perfect answer for me!!!'))
     print(dec)
     print(decode(dec))
     dec = encode_str('O CAPTAIN! my Captain! our fearful trip is done;', 1)
-    print(len('O CAPTAIN! my Captain! our fearful trip is done;'))
     print(dec)
     print(decode(dec))
-    for i in ["ijJ tipvme ibw", "f lopxo uibu z", "pv xpvme ibwf ", "b qfsgfdu botx", "fs gps nf!!!"]:
-        print(len(i))
+    dec = encode_str('zzzZZZ', 3)
+    print(dec)
+    print(decode(dec))
 
 
 
