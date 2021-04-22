@@ -3,8 +3,7 @@ import hashlib
 def crack(hash):
     for i in range(100000):
         str2hash = str(i).zfill(5)
-        result = hashlib.md5(str2hash.encode())
-        if result.hexdigest() == hash:
+        if hashlib.md5(str2hash.encode()).hexdigest() == hash:
             return str2hash
     return None
 
