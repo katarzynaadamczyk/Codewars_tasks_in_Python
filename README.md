@@ -10,12 +10,14 @@ Some interesting tasks I found and solved them using Python 3.
 ## Technologies:
 * Python 3.9
 * Library Hashlib
+* Library Itertools
+* Library String
 
 ## Caesar_2:
 Second variation on Ceasar cipher, task from codewars.com (https://www.codewars.com/kata/55084d3898b323f0aa000546/train/python).
 
 ## Crack_the_pin:
-https://www.codewars.com/kata/5efae11e2d12df00331f91a6
+Solution to following problem found on Codewars: https://www.codewars.com/kata/5efae11e2d12df00331f91a6
 
 ## Password_cracker:
-https://www.codewars.com/kata/59146f7b4670ba520900000a
+Solution to following problem found on Codewars: https://www.codewars.com/kata/59146f7b4670ba520900000a
