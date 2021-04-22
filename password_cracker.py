@@ -3,18 +3,11 @@ from string import ascii_lowercase
 from itertools import product
 
 def password_cracker(hash):
-
-    for passcode in product(ascii_lowercase, repeat=5):
-        print("".join(passcode))
-
-    pass
-
-def crack(hash):
-    for i in range(100000):
-        str2hash = str(i).zfill(5)
-        result = hashlib.md5(str2hash.encode())
-        if result.hexdigest() == hash:
-            return str2hash
+    for i in range(1, 10):
+        for passcode in product(ascii_lowercase, repeat=i):
+            if hashlib.sha1(''.join(passcode).encode()).hexdigest() == hash:
+                return ''.join(passcode)
+                
     return None
 
 def main():
