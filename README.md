@@ -1,7 +1,21 @@
-# Tasks from Codewars solved using Python.
+# Different tasks solved using Python.
+Some interesting tasks I found and solved them using Python 3. 
 
-File Caesar_2:
+## Table of contents
+* [Technologies](#technologies)
+* [Caesar 2](#Caesar_2)
+* [Crack_the_pin](#Crack_the_pin)
+* [Password_cracker](#Password_cracker)
+
+## Technologies:
+* Python 3.9
+* Library Hashlib
+
+## Caesar_2:
 Second variation on Ceasar cipher, task from codewars.com (https://www.codewars.com/kata/55084d3898b323f0aa000546/train/python).
 
-File crack_the_pin:
+## Crack_the_pin:
 https://www.codewars.com/kata/5efae11e2d12df00331f91a6
+
+## Password_cracker:
+https://www.codewars.com/kata/59146f7b4670ba520900000a
