@@ -21,18 +21,18 @@ Second variation on Ceasar cipher, task from codewars.com (https://www.codewars.
 ## Crack_the_pin:
 Solution to following problem found on Codewars: https://www.codewars.com/kata/5efae11e2d12df00331f91a6
 
-## Crack_the_pin:
-Solution to following problem found in Daily Interview Pro newsletter (https://www.techseries.dev/daily):
-Given a string that may represent a number, determine if it is a number. Here's some of examples of how the number may be presented:
-'"123" # Integer'
-'"12.3" # Floating point'
-'"-123" # Negative numbers'
-'"-.3" # Negative floating point'
-'"1.5e5" # Scientific notation'
-Here's some examples of what isn't a proper number:
-'"12a" # No letters'
-'"1 2" # No space between numbers'
-'"1e1.2" # Exponent can only be an integer (positive or negative or 0)'
+## Determine_if_number:
+Solution to following problem found in Daily Interview Pro newsletter (https://www.techseries.dev/daily):<br>
+Given a string that may represent a number, determine if it is a number. Here's some of examples of how the number may be presented:<br>
+'"123" # Integer'<br>
+'"12.3" # Floating point'<br>
+'"-123" # Negative numbers'<br>
+'"-.3" # Negative floating point'<br>
+'"1.5e5" # Scientific notation'<br>
+Here's some examples of what isn't a proper number:<br>
+'"12a" # No letters'<br>
+'"1 2" # No space between numbers'<br>
+'"1e1.2" # Exponent can only be an integer (positive or negative or 0)'<br>
 Scientific notation requires the first number to be less than 10, however to simplify the solution assume the first number can be greater than 10. Do not parse the string with int() or any other python functions.
 
 ## Password_cracker:
