@@ -5,7 +5,9 @@ Some interesting tasks I found and solved them using Python 3.
 * [Technologies](#technologies)
 * [Caesar 2](#Caesar_2)
 * [Crack_the_pin](#Crack_the_pin)
+* [Determine_if_number](#Determine_if_number)
 * [Password_cracker](#Password_cracker)
+* [Weird_prime_generator](#Weird_prime_generator)
 
 ## Technologies:
 * Python 3.9
@@ -14,10 +16,27 @@ Some interesting tasks I found and solved them using Python 3.
 * Library String
 
 ## Caesar_2:
-Second variation on Ceasar cipher, task from codewars.com (https://www.codewars.com/kata/55084d3898b323f0aa000546/train/python).
+Second variation on Ceasar cipher, task from codewars.com (https://www.codewars.com/kata/55084d3898b323f0aa000546).
 
 ## Crack_the_pin:
 Solution to following problem found on Codewars: https://www.codewars.com/kata/5efae11e2d12df00331f91a6
 
+## Crack_the_pin:
+Solution to following problem found in Daily Interview Pro newsletter (https://www.techseries.dev/daily):
+Given a string that may represent a number, determine if it is a number. Here's some of examples of how the number may be presented:
+'"123" # Integer'
+'"12.3" # Floating point'
+'"-123" # Negative numbers'
+'"-.3" # Negative floating point'
+'"1.5e5" # Scientific notation'
+Here's some examples of what isn't a proper number:
+'"12a" # No letters'
+'"1 2" # No space between numbers'
+'"1e1.2" # Exponent can only be an integer (positive or negative or 0)'
+Scientific notation requires the first number to be less than 10, however to simplify the solution assume the first number can be greater than 10. Do not parse the string with int() or any other python functions.
+
 ## Password_cracker:
 Solution to following problem found on Codewars: https://www.codewars.com/kata/59146f7b4670ba520900000a
+
+## Weird_prime_generator
+Solution to following problem found on Codewars: https://www.codewars.com/kata/562b384167350ac93b00010c
