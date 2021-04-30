@@ -3,11 +3,10 @@ import math
 # non-tested functions
 def an(n):
     # returns first n terms of the series a(n)
-    if n == 1:
-        return [7]
-    an_1 = an(n - 1)
-    an_1.append(an_1[-1] + math.gcd(n, an_1[-1]))
-    return an_1
+    out = [7]
+    for i in range(2, n + 1):
+        out.append(out[-1] + math.gcd(i, out[-1]))
+    return out
 
 def gn(n):
     # returns first n terms of the series g(n) + 1 for n = 1
