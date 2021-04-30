@@ -10,8 +10,12 @@ def an(n):
     return an_1
 
 def gn(n):
-    # returns first n terms of the series g(n)
-    pass
+    # returns first n terms of the series g(n) + 1 for n = 1
+    an_n = an(n)
+    gn_n = [1]
+    for i in range(1, len(an_n)):
+        gn_n.append(an_n[i] - an_n[i - 1])
+    return gn_n
 
 def p(n):
     # returns first n primes exluding 1's in same order they are in gn(n)
@@ -60,10 +64,10 @@ def main():
     out = an_over_average(1)
     print(out) 
     print('Should be 3')
-    print('an(10)')
-    print(an(10))
     print('an(25)')
     print(an(25))
+    print('gn(25)')
+    print(gn(25))
 
 if __name__ == '__main__':
     main()
