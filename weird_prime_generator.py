@@ -32,8 +32,7 @@ def an_over(n):
 
 def count_ones(n):
     # returns the number of 1's in the series g(n)
-    # your code
-    pass
+    return len([i for i in gn(n) if i == 1])
 
 def max_pn(n):
     # returns the biggest prime number of p(n)
