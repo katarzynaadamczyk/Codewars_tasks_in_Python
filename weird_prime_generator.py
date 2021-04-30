@@ -17,8 +17,18 @@ def gn(n):
         gn_n.append(an_n[i] - an_n[i - 1])
     return gn_n
 
+def count_not_ones(n):
+    # returns the number of not-1's in the series g(n)
+    return len([i for i in gn(n) if i != 1])
+
 def p(n):
     # returns first n primes exluding 1's in same order they are in gn(n)
+    n2 = n
+    while count_not_ones(n2) != n:
+
+        pass
+
+
     pass
 
 def an_over(n):
@@ -67,6 +77,9 @@ def main():
     print(an(25))
     print('gn(25)')
     print(gn(25))
+    print(f'count_not_ones(100) = {count_not_ones(100)}')
+    print(f'count_not_ones(200) = {count_not_ones(200)}')
+    print(f'count_not_ones(500) = {count_not_ones(500)}')
 
 if __name__ == '__main__':
     main()
