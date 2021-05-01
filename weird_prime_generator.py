@@ -22,19 +22,19 @@ def count_not_ones(n):
 
 def p(n):
     # returns first n primes exluding 1's in same order they are in gn(n)
-    n2 = n # average
+    
     m = n # minimum
+    maxi = n * 2 ** 1000 # maximum
+    n2 = (m + maxi) // 2 # average
     count = count_not_ones(n2)
     while count != n:
         if count < n:
-            n2 *= 2
-        else:
-            n2 = (n2 + m) // 2
             m = n2
+            n2 = (maxi + n2) // 2
+        else:
+            maxi = n2
+            n2 = (n2 + m) // 2
         count = count_not_ones(n2)
-        print(f'count: {count}')
-        print(f'n2: {n2}')
-    print(n2)
     return [i for i in gn(n2) if i != 1]
 
 def an_over(n):
@@ -85,11 +85,12 @@ def main():
     print(gn(25))
     print(f'count_not_ones(100) = {count_not_ones(100)}')
     print(f'count_not_ones(200) = {count_not_ones(200)}')
-    print(f'count_not_ones(2000) = {count_not_ones(2000)}')
     print('p(1)')
     print(p(1))
     print('p(10)')
     print(p(10))
+   # print('p(100)')
+  #  print(p(100))
 
 
 
