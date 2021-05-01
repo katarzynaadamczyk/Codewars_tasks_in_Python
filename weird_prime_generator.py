@@ -21,10 +21,10 @@ def count_not_ones(n):
     return len([i for i in gn(n) if i != 1])
 
 def p(n):
-    # returns first n primes exluding 1's in same order they are in gn(n)
-    
+    # returns first distinct n primes exluding 1's in same order they are in gn(n)
+    # actually it returns first n primes exluding 1's in same order they are in gn(n)
     m = n # minimum
-    maxi = n * 2 ** 1000 # maximum
+    maxi = n * 2 ** 10 # maximum
     n2 = (m + maxi) // 2 # average
     count = count_not_ones(n2)
     while count != n:
@@ -52,8 +52,9 @@ def count_ones(n):
 
 def max_pn(n):
     # returns the biggest prime number of p(n)
-    # your code
-    pass
+    p_n = p(n)
+    p_n.sort()
+    return p_n[-1]
 
 def an_over_average(n):
     # returns an integer average of the an_over(n)
@@ -89,8 +90,6 @@ def main():
     print(p(1))
     print('p(10)')
     print(p(10))
-   # print('p(100)')
-  #  print(p(100))
 
 
 
