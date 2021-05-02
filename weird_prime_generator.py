@@ -22,20 +22,17 @@ def count_not_ones(n):
 
 def p(n):
     # returns first distinct n primes exluding 1's in same order they are in gn(n)
-    # actually it returns first n primes exluding 1's in same order they are in gn(n)
-    m = n # minimum
-    maxi = n * 2 ** 10 # maximum
-    n2 = (m + maxi) // 2 # average
-    count = count_not_ones(n2)
-    while count != n:
-        if count < n:
-            m = n2
-            n2 = (maxi + n2) // 2
-        else:
-            maxi = n2
-            n2 = (n2 + m) // 2
-        count = count_not_ones(n2)
-    return [i for i in gn(n2) if i != 1]
+    ret = []
+    an_1 = 7
+    n2 = 2
+    while len(ret) != n:
+        gn_2 = math.gcd(n2, an_1)
+        if gn_2 != 1 and not gn_2 in ret:
+            ret.append(gn_2)
+        an_1 += gn_2
+        n2 += 1
+    return ret
+
 
 def an_over(n):
     # returns an array of size n of the a(i) / i for every g(i) != 1
