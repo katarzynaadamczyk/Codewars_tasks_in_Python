@@ -65,8 +65,12 @@ def max_pn(n):
 
 def an_over_average(n):
     # returns an integer average of the an_over(n)
-    # your code
-    pass
+    sum = 0
+    an_over_n = an_over(n)
+    for i in an_over_n:
+        sum += i
+    return int(sum / len(an_over_n))
+
 
 def main():
     out = count_ones(1)
