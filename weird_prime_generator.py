@@ -36,7 +36,17 @@ def p(n):
 
 def an_over(n):
     # returns an array of size n of the a(i) / i for every g(i) != 1
-    pass
+    ret = []
+    an_1 = 7
+    n2 = 1
+    gn_1 = 1
+    while len(ret) != n:
+        if gn_1 != 1:
+            ret.append(an_1 / n2)
+        n2 += 1
+        gn_1 = math.gcd(n2, an_1)
+        an_1 += gn_1
+    return ret
 
 
 
@@ -87,6 +97,8 @@ def main():
     print(p(1))
     print('p(10)')
     print(p(10))
+    print('an_over(10)')
+    print(an_over(10))
 
 
 
