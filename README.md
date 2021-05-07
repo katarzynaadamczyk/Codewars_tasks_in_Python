@@ -6,6 +6,7 @@ Some interesting tasks I found and solved them using Python 3.
 * [Caesar 2](#Caesar_2)
 * [Crack_the_pin](#Crack_the_pin)
 * [Determine_if_number](#Determine_if_number)
+* [Irreducible_sum_of_rationals](#Irreducible_sum_of_rationals)
 * [Password_cracker](#Password_cracker)
 * [Weird_prime_generator](#Weird_prime_generator)
 
@@ -34,6 +35,9 @@ Here's some examples of what isn't a proper number:<br>
 '"1 2" # No space between numbers'<br>
 '"1e1.2" # Exponent can only be an integer (positive or negative or 0)'<br>
 Scientific notation requires the first number to be less than 10, however to simplify the solution assume the first number can be greater than 10. Do not parse the string with int() or any other python functions.
+
+## Irreducible_sum_of_rationals:
+Solution to following problem found on Codewars: https://www.codewars.com/kata/5517fcb0236c8826940003c9
 
 ## Password_cracker:
 Solution to following problem found on Codewars: https://www.codewars.com/kata/59146f7b4670ba520900000a
