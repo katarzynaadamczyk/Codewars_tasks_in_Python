@@ -9,10 +9,30 @@ def return_text(lst_of_things):
     return ret
 
 
+def print_grid(grid):
+    for i in range(len(grid[0])):
+        for j in range(len(grid)):
+            print(grid[j][i], end='')
+        print('')
+
+
+
 def main():
     lst = ['apples', 'bananas', 'tofu', 'cats']
     print(lst)
     print(return_text(lst))
+
+    grid = [['.', '.', '.', '.', '.', '.'],
+            ['.', '0', '0', '.', '.', '.'],
+            ['0', '0', '0', '0', '.', '.'],
+            ['0', '0', '0', '0', '0', '.'],
+            ['.', '0', '0', '0', '0', '0'],
+            ['0', '0', '0', '0', '0', '.'],
+            ['0', '0', '0', '0', '.', '.'],
+            ['.', '0', '0', '.', '.', '.'],
+            ['.', '.', '.', '.', '.', '.']]
+    print_grid(grid)
+
 
 if __name__ == '__main__':
     main()
