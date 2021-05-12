@@ -9,6 +9,7 @@ Some interesting tasks I found and solved them using Python 3.
 * [Determine_if_number](#Determine_if_number)
 * [Irreducible_sum_of_rationals](#Irreducible_sum_of_rationals)
 * [Password_cracker](#Password_cracker)
+* [Play_with_two_strings](#Play_with_two_strings)
 * [Weird_prime_generator](#Weird_prime_generator)
 
 ## Technologies:
@@ -47,6 +48,9 @@ Solution to following problem found on Codewars: https://www.codewars.com/kata/5
 
 ## Password_cracker:
 Solution to following problem found on Codewars: https://www.codewars.com/kata/59146f7b4670ba520900000a
+
+## Play_with_two_strings:
+Solution to following problem found on Codewars: https://www.codewars.com/kata/56c30ad8585d9ab99b000c54
 
 ## Weird_prime_generator
 Solution to following problem found on Codewars: https://www.codewars.com/kata/562b384167350ac93b00010c
