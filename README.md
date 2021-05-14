@@ -1,5 +1,5 @@
 # Different tasks solved using Python.
-Some interesting tasks I found and solved them using Python 3. 
+Some interesting tasks I found and solved them using Python 3. This project is under development, when I find something interesting I keep adding it to this repository.
 
 ## Table of contents
 * [Technologies](#technologies)
