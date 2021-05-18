@@ -5,6 +5,7 @@ Some interesting tasks I found and solved them using Python 3. This project is u
 * [Technologies](#technologies)
 * [Automate_the_boring_stuff](#Automate_the_boring_stuff)
 * [Caesar 2](#Caesar_2)
+* [Chain_lightning_challenge](#Chain_lightning_challenge)
 * [Crack_the_pin](#Crack_the_pin)
 * [Determine_if_number](#Determine_if_number)
 * [Irreducible_sum_of_rationals](#Irreducible_sum_of_rationals)
@@ -25,6 +26,9 @@ My solutions to projects described in 'Automate the boring stuff with Python' by
 
 ## Caesar_2:
 Second variation on Ceasar cipher, task from codewars.com (https://www.codewars.com/kata/55084d3898b323f0aa000546).
+
+## Chain_lightning_challenge:
+My solution to challenge: https://challengerocket.com/chain-lightning-challenge/. Further description is in description.txt in the folder Chain_lightning_challenge.
 
 ## Crack_the_pin:
 Solution to following problem found on Codewars: https://www.codewars.com/kata/5efae11e2d12df00331f91a6
