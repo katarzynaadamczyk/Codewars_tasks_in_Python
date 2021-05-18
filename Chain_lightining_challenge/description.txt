@@ -1,0 +1,61 @@
+Complete the code whose purpose is determining statistics of dead units after casting chain lightning - 
+the spell known from Heroes of Might and Magic game series. 
+In this code we consider a simplified version of the problem, in which units are located in one dimension list (battlefield) 
+and the lightning hits always the unit closest to the zero index. Next it jumps to max three next units. 
+The first strike has a power equaling 25 * caster's spell power and every next strike is two times weaker. 
+Cast never hits unit with resistance 100 (lightning skip this unit).
+
+The units consist of such parts of data:
+
+    a type
+    an owner ('player' or 'opponent')
+    a number of hitpoints
+    a number of creatures in the unit
+    a resistance to lightning spells as a percentage (-100 ≤ resistance ≤ 100)
+
+
+Unit{
+
+ String type;
+
+ String owner;
+
+ int hitpoints;
+
+ int number;
+
+ int resistance;
+
+}
+
+
+The damage should be calculated by the formula: damage = strike power * (100% - unit's resistance). 
+Resistance less then 0 means vulneability to lightning spells (can get more damage then strike power). 
+A whole unit always loses the number of hitpoints equaling the sustained damage (with an exception for the overkill case). 
+The spell always kills the maximal number of creatures possible to kill by removing the given number of hitpoints. 
+Sometimes it leaves one unit wounded and it always remains the rest (if it survived) healthy. 
+If the lightning reaches the end of the array, it always stops (after striking the fourth or last unit in battlefield).
+
+
+The chain_spell_solve function should return a list including two other lists: 
+first containing information about player's losses and the second - about opponent's ones. 
+Eg. if 1 creature from Royal Griffin type unit was killed, list shoud contain: "1 Royal Griffin" , 
+124 creatures from Pikeman unit: "124 Pikemans", etc
+
+Example unit tests
+
+type, owner, hitpoints, number, resistance = "type", "owner", "hitpoints", "number", "resistance"
+
+arr = [
+  None,
+  { type: "Mage", owner: 'player', hitpoints: 30, number: 9, resistance: 0},
+  None,
+  { type: "Steel Golem", owner: 'opponent', hitpoints: 35, number: 60, resistance: 50 },
+  None,
+  None,
+  { type: "Roc", owner: 'player', hitpoints: 40, number: 30, resistance: 0 },
+  { type: "Sprite", owner: 'opponent', hitpoints: 2, number: 120, resistance: 0 }
+]
+power = 100
+answer = [['9 Mages', '15 Rocs'], ['17 Steel Golems', '120 Sprites']]
+self.assertEqual(chain_spell_solve(arr, power), answer)
