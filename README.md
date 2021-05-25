@@ -11,6 +11,7 @@ Some interesting tasks I found and solved them using Python 3. This project is u
 * [Irreducible_sum_of_rationals](#Irreducible_sum_of_rationals)
 * [Password_cracker](#Password_cracker)
 * [Play_with_two_strings](#Play_with_two_strings)
+* [Tasks_about_strings](#Tasks_about_strings)
 * [Weird_prime_generator](#Weird_prime_generator)
 
 ## Technologies:
@@ -55,6 +56,10 @@ Solution to following problem found on Codewars: https://www.codewars.com/kata/5
 
 ## Play_with_two_strings:
 Solution to following problem found on Codewars: https://www.codewars.com/kata/56c30ad8585d9ab99b000c54
+
+## Tasks_about_strings:
+Solutions to problems with strings.
+* find_first_unique_letter - find the most efficient way to find the first unique letter in given string
 
 ## Weird_prime_generator
 Solution to following problem found on Codewars: https://www.codewars.com/kata/562b384167350ac93b00010c
