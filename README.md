@@ -8,6 +8,7 @@ Some interesting tasks I found and solved them using Python 3. This project is u
 * [Chain_lightning_challenge](#Chain_lightning_challenge)
 * [Crack_the_pin](#Crack_the_pin)
 * [Determine_if_number](#Determine_if_number)
+* [Int32_to_IPv4](#Int32_to_IPv4)
 * [Irreducible_sum_of_rationals](#Irreducible_sum_of_rationals)
 * [Password_cracker](#Password_cracker)
 * [Play_with_two_strings](#Play_with_two_strings)
@@ -47,6 +48,9 @@ Here's some examples of what isn't a proper number:<br>
 '"1 2" # No space between numbers'<br>
 '"1e1.2" # Exponent can only be an integer (positive or negative or 0)'<br>
 Scientific notation requires the first number to be less than 10, however to simplify the solution assume the first number can be greater than 10. Do not parse the string with int() or any other python functions.
+
+## Int32_to_IPv4:
+Solution to following problem found on Codewars: https://www.codewars.com/kata/52e88b39ffb6ac53a400022e
 
 ## Irreducible_sum_of_rationals:
 Solution to following problem found on Codewars: https://www.codewars.com/kata/5517fcb0236c8826940003c9
