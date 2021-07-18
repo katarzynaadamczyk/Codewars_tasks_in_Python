@@ -1,5 +1,10 @@
+def parse(town, strng):
+    pass
+
+
 def mean(town, strng):
     # your code
+    # return -1 or -1.0 if the city does not exist in the file
     pass
 
 

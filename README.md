@@ -11,6 +11,7 @@ Some interesting tasks I found and solved them using Python 3. This project is u
 * [Int32_to_IPv4](#Int32_to_IPv4)
 * [Irreducible_sum_of_rationals](#Irreducible_sum_of_rationals)
 * [Password_cracker](#Password_cracker)
+* [Play_with_arrays](#Play_with_arrays)
 * [Play_with_two_strings](#Play_with_two_strings)
 * [Rainfall](#Rainfall)
 * [Tasks_about_strings](#Tasks_about_strings)
@@ -58,6 +59,10 @@ Solution to following problem found on Codewars: https://www.codewars.com/kata/5
 
 ## Password_cracker:
 Solution to following problem found on Codewars: https://www.codewars.com/kata/59146f7b4670ba520900000a
+
+## Play_with_arrays:
+Solution to problems regarding arrays.
+* Minimum_moves - my solution to problem found on: https://leetcode.com/problems/minimum-moves-to-equal-array-elements-ii
 
 ## Play_with_two_strings:
 Solution to following problem found on Codewars: https://www.codewars.com/kata/56c30ad8585d9ab99b000c54
