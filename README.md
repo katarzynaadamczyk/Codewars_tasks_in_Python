@@ -73,6 +73,7 @@ Solution to following problem found on Codewars: https://www.codewars.com/kata/5
 
 ## Tasks_about_strings:
 Solutions to problems with strings.
+* break_a_palindrome - Given a palindromic string of lowercase English letters palindrome, replace exactly one character with any lowercase English letter so that the resulting string is not a palindrome and that it is the lexicographically smallest one possible
 * find_first_unique_letter - find the most efficient way to find the first unique letter in given string
 
 ## Weird_prime_generator
