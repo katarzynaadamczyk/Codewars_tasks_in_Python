@@ -1,14 +1,31 @@
 def run_length_encoding(s):
-    return []
+    ret = []
+    if len(s):
+        last_letter = s[0]
+        letter_count = 1
+        
+        for i in range(1, len(s)):
+            if s[i] == last_letter:
+                letter_count += 1
+            else:
+                ret.append([letter_count, last_letter])
+                last_letter = s[i]
+                letter_count = 1
+        ret.append([letter_count, last_letter])
+    
+    return ret
+
     
 
 
 def main():
-    pass
-#    print(f'Solution for [4,2,5,8,7,3,7] is {solution([4,2,5,8,7,3,7])}')
-#    print(f'Solution for [14,21,16,35,22] is {solution([14,21,16,35,22])}')
-#    print(f'Solution for [5,5,5,5,5,5] is {solution([5,5,5,5,5,5])}')
-#    print(f'Solution for [5,5,2,7,3,1,3,4,10,2] is {solution([5,5,2,7,3,1,3,4,10,2])} (it should equal 4')
+    print(f'Solution for "" is {run_length_encoding("")}')
+    print(f'Solution for "abc" is {run_length_encoding("abc")}')
+    print(f'Solution for "aab" is {run_length_encoding("aab")}')
+    print(f'Solution for "hello world!" is {run_length_encoding("hello world!")}')
+    print(f'Solution for "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbb" is {run_length_encoding("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbb")}')
+    print(f'''Solution for "WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWBWWWWWWWWWWWWWW" 
+            is {run_length_encoding("WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWBWWWWWWWWWWWWWW")}''')
 
 
 if __name__ == '__main__':
