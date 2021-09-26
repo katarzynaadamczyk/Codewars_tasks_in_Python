@@ -74,6 +74,7 @@ Solution to following problem found on Codewars: https://www.codewars.com/kata/5
 ## Tasks_about_strings:
 Solutions to problems with strings.
 * break_a_palindrome - Given a palindromic string of lowercase English letters palindrome, replace exactly one character with any lowercase English letter so that the resulting string is not a palindrome and that it is the lexicographically smallest one possible
+* burrows_wheeler_transformation - Solution to following problem found on Codewars: https://www.codewars.com/kata/54ce4c6804fcc440a1000ecb
 * find_first_unique_letter - find the most efficient way to find the first unique letter in given string
 * rle - Solution to following problem found on Codewars: https://www.codewars.com/kata/546dba39fa8da224e8000467
 
