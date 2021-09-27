@@ -14,8 +14,6 @@ def solution(nums: List[int]) -> int:
         else:
             evens.append(0)
 
-    print(evens)
-
     if count_of_evens == len(evens):
         return len(evens) // 2
     if count_of_evens < 2:
@@ -29,10 +27,6 @@ def solution(nums: List[int]) -> int:
             count_neighbours_1 += 1
             if evens[i-2] == 1:
                 count_neighbours_2 += 1    
-
-    print(f'count_of_evens: {count_of_evens}')
-    print(f'count_neighbours_1: {count_neighbours_1}')
-    print(f'count_neighbours_2: {count_neighbours_2}')
 
     return count_of_evens - count_neighbours_1 + count_neighbours_2
     

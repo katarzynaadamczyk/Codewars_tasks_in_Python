@@ -12,8 +12,6 @@ Some interesting tasks I found and solved them using Python 3. This project is u
 * [Irreducible_sum_of_rationals](#Irreducible_sum_of_rationals)
 * [Password_cracker](#Password_cracker)
 * [Play_with_arrays](#Play_with_arrays)
-* [Play_with_two_strings](#Play_with_two_strings)
-* [Rainfall](#Rainfall)
 * [Tasks_about_strings](#Tasks_about_strings)
 * [Weird_prime_generator](#Weird_prime_generator)
 
@@ -65,18 +63,15 @@ Solution to problems regarding arrays.
 * Circles - my solution to following problem: You are given n numbers on a circle, described by an array A. Find the maximum number of neighbouring pairs whose sums are even. One element can belong to only one pair.
 * Minimum_moves - my solution to problem found on: https://leetcode.com/problems/minimum-moves-to-equal-array-elements-ii
 
-## Play_with_two_strings:
-Solution to following problem found on Codewars: https://www.codewars.com/kata/56c30ad8585d9ab99b000c54
-
-## Rainfall:
-Solution to following problem found on Codewars: https://www.codewars.com/kata/56a32dd6e4f4748cc3000006
-
 ## Tasks_about_strings:
 Solutions to problems with strings.
 * break_a_palindrome - Given a palindromic string of lowercase English letters palindrome, replace exactly one character with any lowercase English letter so that the resulting string is not a palindrome and that it is the lexicographically smallest one possible
 * burrows_wheeler_transformation - Solution to following problem found on Codewars: https://www.codewars.com/kata/54ce4c6804fcc440a1000ecb
 * find_first_unique_letter - find the most efficient way to find the first unique letter in given string
+* Rainfall - Solution to following problem found on Codewars: https://www.codewars.com/kata/56a32dd6e4f4748cc3000006
+* Play_with_two_strings - Solution to following problem found on Codewars: https://www.codewars.com/kata/56c30ad8585d9ab99b000c54
 * rle - Solution to following problem found on Codewars: https://www.codewars.com/kata/546dba39fa8da224e8000467
+
 
 ## Weird_prime_generator
 Solution to following problem found on Codewars: https://www.codewars.com/kata/562b384167350ac93b00010c
