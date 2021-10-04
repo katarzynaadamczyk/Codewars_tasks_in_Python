@@ -40,13 +40,31 @@ def encode(s):
     return (''.join(x[-1] for x in tab), pos)
 
 def decode(s, n):
-    return
+    if s == '' or n >= len(s) or n < 0:
+        return ''
+    sorted_letters = ''.join(sorted(s))
+    tab = []
+
+    for i in range(len(s)):
+        tab.append(s[i] + sorted_letters[i])
+    
+    tab = sorted(tab)
+
+    for i in range(2, len(s)):
+        for j in range(len(tab)):
+            tab[j] = s[j] + tab[j]
+        tab = sorted(tab)
+    
+    return tab[n]
 
 
 def main():
     print(f'Solution for "bananabar" is {encode("bananabar")}, it should equal ("nnbbraaaa", 4)')
     print(f'Solution for "Humble Bundle" is {encode("Humble Bundle")}, it should equal ("e emnllbduuHB", 2)')
-    print(f'Solution for "Mellow Yellow"" is {encode("Mellow Yellow")}, it should equal ("ww MYeelllloo", 1)')
+    print(f'Solution for "Mellow Yellow" is {encode("Mellow Yellow")}, it should equal ("ww MYeelllloo", 1)')
+    print(f'Solution for ("nnbbraaaa", 4) is {decode("nnbbraaaa", 4)}, it should equal "bananabar"')
+    print(f'Solution for ("e emnllbduuHB", 2) is {decode("e emnllbduuHB", 2)}, it should equal "Humble Bundle"')
+    print(f'Solution for ("ww MYeelllloo", 1) is {decode("ww MYeelllloo", 1)}, it should equal "Mellow Yellow"')
 
 
 if __name__ == '__main__':
