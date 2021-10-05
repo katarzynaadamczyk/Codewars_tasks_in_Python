@@ -3,22 +3,26 @@ def max_sum(N_vertices, A, B):
         return 0
     
     # create an array for count of each appearance of vertex
-    vertex_count = {}
+    vertex_count = []
     for i in range(N_vertices):
-        vertex_count[i + 1] = 0
+        vertex_count.append(0)
 
     # count each appearance
     for i in range(len(A)):
-        vertex_count[A[i]] += 1
-        vertex_count[B[i]] += 1
+        vertex_count[A[i] - 1] += 1
+        vertex_count[B[i] - 1] += 1
     
-    lst = list(vertex_count.values())
+    # sort appearances in reversed order
+    lst = sorted(vertex_count, reverse=True)
 
+    # count the return value - max_N not used yet multiplied by its count
+    return_value = 0
 
-    print(vertex_count)
-    print(lst)
+    for x in lst:
+        return_value += x * N_vertices
+        N_vertices -= 1
 
-    pass
+    return return_value
 
 def main():
     print(f'Solution for N = 5, A = [2, 2, 1, 2], B = [1, 3, 4, 4] is {max_sum(5, [2, 2, 1, 2], [1, 3, 4, 4])}, it should equal 31')
