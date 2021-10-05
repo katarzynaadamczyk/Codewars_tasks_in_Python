@@ -12,6 +12,7 @@ Some interesting tasks I found and solved them using Python 3. This project is u
 * [Irreducible_sum_of_rationals](#Irreducible_sum_of_rationals)
 * [Password_cracker](#Password_cracker)
 * [Play_with_arrays](#Play_with_arrays)
+* [Tasks_about_graphs](#Tasks_about_graphs)
 * [Tasks_about_strings](#Tasks_about_strings)
 * [Weird_prime_generator](#Weird_prime_generator)
 
@@ -62,6 +63,10 @@ Solution to following problem found on Codewars: https://www.codewars.com/kata/5
 Solution to problems regarding arrays.
 * Circles - my solution to following problem: You are given n numbers on a circle, described by an array A. Find the maximum number of neighbouring pairs whose sums are even. One element can belong to only one pair.
 * Minimum_moves - my solution to problem found on: https://leetcode.com/problems/minimum-moves-to-equal-array-elements-ii
+
+## Tasks_about_graphs:
+Solutions to problems with graphs.
+* max_sum - Given an undirected graph consisting of N vertices, numbered from 1 to N, and M edges. The graph is described by two arrays, A and B, both of length M. A pair (A[K], B[K]), for K from 0 to M-1, describes an edge between vertex A[K] and vertex B[K]. Task is to assign all values from the range [1, N] to the vertices of the graph in such a way that one number is given to one vertice and sum over all edges of the values at the edges' endpoints is maximal. 
 
 ## Tasks_about_strings:
 Solutions to problems with strings.
