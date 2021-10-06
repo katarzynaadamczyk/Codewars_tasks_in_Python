@@ -1,8 +1,29 @@
+# a function to return the array containing only numbers of rainfall for given city
+
 def parse(town, strng):
+    
+    pos = strng.find(town)
+    
+    if pos < 0:
+        return pos
+    
+    pos_end = strng.find('\n', pos + 1)
+
+    print(f'pos = {pos}, pos_end = {pos_end}')
+
+    return [0, 1, 2]
     pass
 
 
+
 def mean(town, strng):
+
+    data = parse(town, strng)
+    
+    if type(data) == int:
+        return data
+    
+    
     # your code
     # return -1 or -1.0 if the city does not exist in the file
     pass
@@ -40,8 +61,8 @@ def main():
          "Beijing", "Lima", "Montevideo", "Caracas", "Madrid", "Berlin"]
     
     for town in towns:
-        print(f'Data : For {town} mean = {mean(town, data)}')
-        print(f'Data1: For {town} mean = {mean(town, data)}')
+        print(f'Data : For {town} mean = {mean(town, data)}, variance = {variance(town, data)}')
+        print(f'Data1: For {town} mean = {mean(town, data1)}, variance = {variance(town, data1)}')
     
 
 if __name__ == '__main__':
