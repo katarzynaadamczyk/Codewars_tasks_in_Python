@@ -20,7 +20,7 @@ def parse(town, strng):
     return ret
 
 
-
+# count mean for given city
 def mean(town, strng):
 
     data = parse(town, strng)
@@ -28,10 +28,7 @@ def mean(town, strng):
     if type(data) == int:
         return data
     
-    
-    # your code
-    # return -1 or -1.0 if the city does not exist in the file
-    pass
+    return sum(x for x in data) / len(data)
 
 
 def variance(town, strng):
