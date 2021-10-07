@@ -4,7 +4,7 @@ import re
 
 def parse(town, strng):
     
-    pos = strng.find(town)
+    pos = strng.find(town + ':')
     
     if pos < 0:
         return pos
@@ -68,7 +68,7 @@ def main():
             Lima:Jan 11.2,Feb 10.9,Mar 10.7,Apr 10.4,May 10.6,Jun 11.8,Jul 14.4,Aug 13.1,Sep 23.3,Oct 1.7,Nov 0.5,Dec 10.7"""
 
     towns = ["Rome", "London", "Paris", "NY", "Vancouver", "Sydney", "Bangkok", "Tokyo",
-         "Beijing", "Lima", "Montevideo", "Caracas", "Madrid", "Berlin"]
+         "Beijing", "Lima", "Montevideo", "Caracas", "Madrid", "Berlin", "Lon"]
     
     for town in towns:
         print(f'Data : For {town} mean = {mean(town, data)}, variance = {variance(town, data)}')
