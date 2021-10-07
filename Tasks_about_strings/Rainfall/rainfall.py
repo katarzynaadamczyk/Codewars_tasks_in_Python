@@ -32,8 +32,16 @@ def mean(town, strng):
 
 
 def variance(town, strng):
-    # your code
-    pass
+    data = parse(town, strng)
+    
+    if type(data) == int:
+        return data
+    
+    mean_2 = mean(town, strng)
+
+    return sum((x - mean_2)**2 for x in data) / len(data)
+
+    
 
 def main():
 
