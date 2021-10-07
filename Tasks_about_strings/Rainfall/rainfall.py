@@ -1,3 +1,5 @@
+import re
+
 # a function to return the array containing only numbers of rainfall for given city
 
 def parse(town, strng):
@@ -7,12 +9,15 @@ def parse(town, strng):
     if pos < 0:
         return pos
     
-    pos_end = strng.find('\n', pos + 1)
+    pattern = re.compile('\d+\.\d+')
+    ret = []
 
-    print(f'pos = {pos}, pos_end = {pos_end}')
+    for i in range(12):
+        m = pattern.search(strng, pos)
+        pos = m.span()[1]
+        ret.append(float(m.group()))
 
-    return [0, 1, 2]
-    pass
+    return ret
 
 
 
