@@ -4,6 +4,7 @@ Some interesting tasks I found and solved them using Python 3. This project is u
 ## Table of contents
 * [Technologies](#technologies)
 * [Automate_the_boring_stuff](#Automate_the_boring_stuff)
+* [Add_two_numbers](#Add_two_numbers)
 * [Caesar 2](#Caesar_2)
 * [Chain_lightning_challenge](#Chain_lightning_challenge)
 * [Crack_the_pin](#Crack_the_pin)
@@ -26,6 +27,9 @@ Some interesting tasks I found and solved them using Python 3. This project is u
 
 ## Automate_the_boring_stuff
 My solutions to projects described in 'Automate the boring stuff with Python' by Albert Sweigart. Each individual .py file solves problem given at the end of its title's chapter (e.g. chapter_3.py solves problem described at the end of chapter 3, etc.). 
+
+## Add_two_numbers
+My solutions to problem found on leetcode.com: https://leetcode.com/problems/add-two-numbers/.
 
 ## Caesar_2:
 Second variation on Ceasar cipher, task from codewars.com (https://www.codewars.com/kata/55084d3898b323f0aa000546).
