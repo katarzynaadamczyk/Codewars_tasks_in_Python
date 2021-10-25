@@ -14,6 +14,19 @@ class Solution:
         # TODO
         pass
 
+def add_node(num, next=None, lst=[]):
+    node = ListNode(num, next=next)
+    lst.append(node)
+    return lst
 
 
+def main():
+    lst = add_node(3)
+    lst = add_node(4, lst[0], lst)
+    lst = add_node(4, lst[1], lst)
+    print(lst)
+    pass
 
+
+if __name__ == '__main__':
+    main()
