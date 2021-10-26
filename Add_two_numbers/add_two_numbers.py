@@ -14,6 +14,14 @@ class ListNode:
 class Solution:
     @staticmethod
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        if l1 is None and l2 is None:
+            return [0]
+        if l1 is None:
+            return l2
+        if l2 is None:
+            return l1
+        prev = 0
+        
         # TODO
         pass
 
