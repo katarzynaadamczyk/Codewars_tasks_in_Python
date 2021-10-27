@@ -47,6 +47,13 @@ class Solution:
             lst[0].print_node(end='')
         print(']')
 
+    @staticmethod
+    def get_number_from_list(lst):
+        num = 0
+        for i in range(len(lst)):
+            num += lst[i].val * 10 ** i
+        return num
+
 
     @staticmethod
     def addTwoNumbers(l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
@@ -56,10 +63,30 @@ class Solution:
             return l2
         if l2 is None:
             return l1
+        
         prev = 0
+        lst = []
+        it1 = l1[0]
+        it2 = l2[0]
 
-        # TODO
-        pass
+        while it1 is not None and it2 is not None:
+            if it1 is None:
+                add = (prev + it2.val) % 10
+                prev = (prev + it2.val) // 10
+                it2 = it2.next
+            elif it2 is None:
+                add = (prev + it1.val) % 10
+                prev = (prev + it1.val) // 10
+                it1 = it1.next
+            else:
+                add = (prev + it1.val + it2.val) % 10
+                prev = (prev + it1.val + it2.val) // 10
+                it1 = it1.next
+                it2 = it2.next
+            Solution.add_node(add, lst)
+        if prev > 0:
+            Solution.add_node(prev, lst)
+        return lst
 
 
 
@@ -77,6 +104,8 @@ def main():
     Solution.print_reversed_linked_list(sec)
 
     # solution
+    print(Solution.get_number_from_list(Solution.addTwoNumbers(lst, sec)))
+    print(Solution.get_number_from_list(lst) + Solution.get_number_from_list(sec))
 
 
     pass
