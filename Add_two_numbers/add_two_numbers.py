@@ -83,10 +83,10 @@ class Solution:
                 prev = (prev + it1.val + it2.val) // 10
                 it1 = it1.next
                 it2 = it2.next
-            Solution.add_node(add, lst)
+            lst.insert(0, add)
         if prev > 0:
-            Solution.add_node(prev, lst)
-        return lst
+            lst.insert(0, prev)
+        return Solution.create_node_list(lst)
 
 
     @staticmethod
