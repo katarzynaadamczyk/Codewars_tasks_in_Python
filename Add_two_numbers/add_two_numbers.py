@@ -12,6 +12,23 @@ class ListNode:
 
 
 class Solution:
+    
+    @staticmethod
+    def add_node(num, lst=[]): # add this function to solution class ?
+        if len(lst):
+            node = ListNode(num, next=lst[0])
+        else:
+            node = ListNode(num, next=None)
+        lst.insert(0, node)
+        return lst
+
+    @staticmethod
+    def create_node_list(nums=[]):
+        lst = []
+        for num in nums:
+            Solution.add_node(num, lst)
+        return lst
+
     @staticmethod
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         if l1 is None and l2 is None:
@@ -21,17 +38,9 @@ class Solution:
         if l2 is None:
             return l1
         prev = 0
-        
+
         # TODO
         pass
-
-def add_node(num, lst=[]):
-    if len(lst):
-        node = ListNode(num, next=lst[0])
-    else:
-        node = ListNode(num, next=None)
-    lst.insert(0, node)
-    return lst
 
 def print_linked_list(lst):
     print('[', end='')
@@ -51,18 +60,12 @@ def print_reversed_linked_list(lst):
 
 def main():
     # first list
-    lst = []
-    add_node(3, lst)
-    add_node(4, lst)
-    add_node(2, lst)
+    lst = Solution.create_node_list([3, 4, 2])
     print_linked_list(lst)
     print_reversed_linked_list(lst)
 
     # second list
-    sec = []
-    add_node(4, sec)
-    add_node(6, sec)
-    add_node(5, sec)
+    sec = Solution.create_node_list([4, 6, 5])
     print_linked_list(sec)
     print_reversed_linked_list(sec)
 
