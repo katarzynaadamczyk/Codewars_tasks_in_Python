@@ -89,6 +89,14 @@ class Solution:
         return lst
 
 
+    @staticmethod
+    def addTwoNumbers2(l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        num1 = Solution.get_number_from_list(l1)
+        num2 = Solution.get_number_from_list(l2)
+        return Solution.create_node_list([int(x) for x in str(num1+num2)])
+
+
+
 
 
 
@@ -105,7 +113,9 @@ def main():
 
     # solution
     print(Solution.get_number_from_list(Solution.addTwoNumbers(lst, sec)))
+    print(Solution.get_number_from_list(Solution.addTwoNumbers2(lst, sec)))
     print(Solution.get_number_from_list(lst) + Solution.get_number_from_list(sec))
+
 
 
     pass
