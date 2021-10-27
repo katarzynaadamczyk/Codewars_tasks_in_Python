@@ -14,7 +14,7 @@ class ListNode:
 class Solution:
     
     @staticmethod
-    def add_node(num, lst=[]): # add this function to solution class ?
+    def add_node(num, lst=[]):  # TO CHANGE - I GET ONLY ADDRESS OF THE FIRST ELEMENT OF LINKED LIST
         if len(lst):
             node = ListNode(num, next=lst[0])
         else:
@@ -23,14 +23,14 @@ class Solution:
         return lst
 
     @staticmethod
-    def create_node_list(nums=[]):
+    def create_node_list(nums=[]): # TO CHANGE - I GET ONLY ADDRESS OF THE FIRST ELEMENT OF LINKED LIST
         lst = []
         for num in nums:
             Solution.add_node(num, lst)
         return lst
     
     @staticmethod
-    def print_linked_list(lst):
+    def print_linked_list(lst): # TO CHANGE - I GET ONLY ADDRESS OF THE FIRST ELEMENT OF LINKED LIST
         print('[', end='')
         if len(lst):
             for i in range(len(lst) - 1):
@@ -39,7 +39,7 @@ class Solution:
         print(']')
 
     @staticmethod
-    def print_reversed_linked_list(lst):
+    def print_reversed_linked_list(lst): # TO CHANGE - I GET ONLY ADDRESS OF THE FIRST ELEMENT OF LINKED LIST
         print('[', end='')
         if len(lst):
             for i in range(len(lst) - 1):
@@ -48,14 +48,14 @@ class Solution:
         print(']')
 
     @staticmethod
-    def get_number_from_list(lst):
+    def get_number_from_list(lst): # TO CHANGE - I GET ONLY ADDRESS OF THE FIRST ELEMENT OF LINKED LIST
         num = 0
         for i in range(len(lst)):
             num += lst[i].val * 10 ** i
         return num
 
 
-    @staticmethod
+    @staticmethod # TO CHANGE - I GET ONLY FIRST LIST NODE!!!
     def addTwoNumbers(l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         if l1 is None and l2 is None:
             return [0]
@@ -89,7 +89,7 @@ class Solution:
         return Solution.create_node_list(lst)
 
 
-    @staticmethod
+    @staticmethod # TO CHANGE - I GET ONLY ADDRESS OF THE FIRST ELEMENT OF LINKED LIST
     def addTwoNumbers2(l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         num1 = Solution.get_number_from_list(l1)
         num2 = Solution.get_number_from_list(l2)
