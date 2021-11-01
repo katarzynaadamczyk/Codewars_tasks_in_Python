@@ -54,7 +54,7 @@ class Solution:
         return num
 
 
-    @staticmethod # TO CHANGE - I GET ONLY FIRST LIST NODE!!!
+    @staticmethod 
     def addTwoNumbers(l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         if l1 is None and l2 is None:
             return [0]
@@ -95,7 +95,7 @@ class Solution:
         return first_node
 
 
-    @staticmethod # TO CHANGE - I GET ONLY ADDRESS OF THE FIRST ELEMENT OF LINKED LIST
+    @staticmethod 
     def addTwoNumbers2(l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         num1 = Solution.get_number_from_node(l1)
         num2 = Solution.get_number_from_node(l2)
@@ -154,7 +154,6 @@ def main():
     print(f'SECOND ALGORITHM: {Solution.get_number_from_node(Solution.addTwoNumbers2(lst, sec))}')
     print(f'CORRECT IS: {Solution.get_number_from_node(lst) + Solution.get_number_from_node(sec)}')
 
-    pass
 
 
 if __name__ == '__main__':
