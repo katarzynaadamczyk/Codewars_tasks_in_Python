@@ -44,10 +44,13 @@ class Solution:
         print(lst)
 
     @staticmethod
-    def get_number_from_list(lst): # TO CHANGE - I GET ONLY ADDRESS OF THE FIRST ELEMENT OF LINKED LIST
+    def get_number_from_node(node): 
         num = 0
-        for i in range(len(lst)):
-            num += lst[i].val * 10 ** i
+        i = 0
+        while node:
+            num += node.val * 10 ** i
+            i += 1
+            node = node.next
         return num
 
 
@@ -61,28 +64,35 @@ class Solution:
             return l1
         
         prev = 0
-        lst = []
-        it1 = l1[0]
-        it2 = l2[0]
+        first_node = None
+        last_node = None
 
-        while it1 is not None and it2 is not None:
-            if it1 is None:
-                add = (prev + it2.val) % 10
-                prev = (prev + it2.val) // 10
-                it2 = it2.next
-            elif it2 is None:
-                add = (prev + it1.val) % 10
-                prev = (prev + it1.val) // 10
-                it1 = it1.next
+
+        while l1 is not None and l2 is not None:
+            if l1 is None:
+                add = (prev + l2.val) % 10
+                prev = (prev + l2.val) // 10
+                l2 = l2.next
+            elif l2 is None:
+                add = (prev + l1.val) % 10
+                prev = (prev + l1.val) // 10
+                l1 = l1.next
             else:
-                add = (prev + it1.val + it2.val) % 10
-                prev = (prev + it1.val + it2.val) // 10
-                it1 = it1.next
-                it2 = it2.next
-            lst.insert(0, add)
+                add = (prev + l1.val + l2.val) % 10
+                prev = (prev + l1.val + l2.val) // 10
+                l1 = l1.next
+                l2 = l2.next
+            if first_node is None:
+                first_node = Solution.add_node(add, next=None)
+                last_node = first_node
+            else:
+                tmp = Solution.add_node(add, next=None)
+                last_node.next = tmp
+                last_node = tmp
         if prev > 0:
-            lst.insert(0, prev)
-        return Solution.create_node_list(lst)
+            tmp = Solution.add_node(prev, next=None)
+            last_node.next = tmp
+        return first_node
 
 
     @staticmethod # TO CHANGE - I GET ONLY ADDRESS OF THE FIRST ELEMENT OF LINKED LIST
@@ -101,16 +111,18 @@ def main():
     lst = Solution.create_node_list([3, 4, 2])
     Solution.print_linked_list(lst)
     Solution.print_reversed_linked_list(lst)
+    print(Solution.get_number_from_node(lst))
 
     # second list
     sec = Solution.create_node_list([4, 6, 5])
     Solution.print_linked_list(sec)
     Solution.print_reversed_linked_list(sec)
+    print(Solution.get_number_from_node(sec))
 
     # solution
-    #print(Solution.get_number_from_list(Solution.addTwoNumbers(lst, sec)))
+    print(Solution.get_number_from_node(Solution.addTwoNumbers(lst, sec)))
     #print(Solution.get_number_from_list(Solution.addTwoNumbers2(lst, sec)))
-    #print(Solution.get_number_from_list(lst) + Solution.get_number_from_list(sec))
+    print(Solution.get_number_from_node(lst) + Solution.get_number_from_node(sec))
 
 
 
