@@ -68,7 +68,7 @@ class Solution:
         last_node = None
 
 
-        while l1 is not None and l2 is not None:
+        while not (l1 is None and l2 is None):
             if l1 is None:
                 add = (prev + l2.val) % 10
                 prev = (prev + l2.val) // 10
@@ -97,8 +97,8 @@ class Solution:
 
     @staticmethod # TO CHANGE - I GET ONLY ADDRESS OF THE FIRST ELEMENT OF LINKED LIST
     def addTwoNumbers2(l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
-        num1 = Solution.get_number_from_list(l1)
-        num2 = Solution.get_number_from_list(l2)
+        num1 = Solution.get_number_from_node(l1)
+        num2 = Solution.get_number_from_node(l2)
         return Solution.create_node_list([int(x) for x in str(num1+num2)])
 
 
@@ -107,24 +107,52 @@ class Solution:
 
 
 def main():
-    # first list
+    # FIRST TEST
+    # first number
     lst = Solution.create_node_list([3, 4, 2])
     Solution.print_linked_list(lst)
     Solution.print_reversed_linked_list(lst)
     print(Solution.get_number_from_node(lst))
 
-    # second list
+    # second number
     sec = Solution.create_node_list([4, 6, 5])
     Solution.print_linked_list(sec)
     Solution.print_reversed_linked_list(sec)
     print(Solution.get_number_from_node(sec))
 
     # solution
-    print(Solution.get_number_from_node(Solution.addTwoNumbers(lst, sec)))
-    #print(Solution.get_number_from_list(Solution.addTwoNumbers2(lst, sec)))
-    print(Solution.get_number_from_node(lst) + Solution.get_number_from_node(sec))
+    print(f'FIRST ALGORITHM: {Solution.get_number_from_node(Solution.addTwoNumbers(lst, sec))}')
+    print(f'SECOND ALGORITHM: {Solution.get_number_from_node(Solution.addTwoNumbers2(lst, sec))}')
+    print(f'CORRECT IS: {Solution.get_number_from_node(lst) + Solution.get_number_from_node(sec)}')
+
+    # SECOND TEST
+    # first number
+    lst = Solution.create_node_list([2])
+    print(Solution.get_number_from_node(lst))
+
+    # second number
+    sec = Solution.create_node_list([4, 6, 5])
+    print(Solution.get_number_from_node(sec))
+
+    # solution
+    print(f'FIRST ALGORITHM: {Solution.get_number_from_node(Solution.addTwoNumbers(lst, sec))}')
+    print(f'SECOND ALGORITHM: {Solution.get_number_from_node(Solution.addTwoNumbers2(lst, sec))}')
+    print(f'CORRECT IS: {Solution.get_number_from_node(lst) + Solution.get_number_from_node(sec)}')
 
 
+    # THIRD TEST
+    # first number
+    lst = Solution.create_node_list([2, 5, 6, 7, 9, 1])
+    print(Solution.get_number_from_node(lst))
+
+    # second number
+    sec = Solution.create_node_list([4, 6, 5])
+    print(Solution.get_number_from_node(sec))
+
+    # solution
+    print(f'FIRST ALGORITHM: {Solution.get_number_from_node(Solution.addTwoNumbers(lst, sec))}')
+    print(f'SECOND ALGORITHM: {Solution.get_number_from_node(Solution.addTwoNumbers2(lst, sec))}')
+    print(f'CORRECT IS: {Solution.get_number_from_node(lst) + Solution.get_number_from_node(sec)}')
 
     pass
 
