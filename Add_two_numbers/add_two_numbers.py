@@ -14,38 +14,34 @@ class ListNode:
 class Solution:
     
     @staticmethod
-    def add_node(num, lst=[]):  # TO CHANGE - I GET ONLY ADDRESS OF THE FIRST ELEMENT OF LINKED LIST
-        if len(lst):
-            node = ListNode(num, next=lst[0])
-        else:
-            node = ListNode(num, next=None)
-        lst.insert(0, node)
-        return lst
+    def add_node(num, next=None):  
+        node = ListNode(num, next=next)
+        return node
 
     @staticmethod
-    def create_node_list(nums=[]): # TO CHANGE - I GET ONLY ADDRESS OF THE FIRST ELEMENT OF LINKED LIST
-        lst = []
+    def create_node_list(nums=[]): 
+        next = None
         for num in nums:
-            Solution.add_node(num, lst)
-        return lst
+            next = Solution.add_node(num, next)
+        return next
     
     @staticmethod
-    def print_linked_list(lst): # TO CHANGE - I GET ONLY ADDRESS OF THE FIRST ELEMENT OF LINKED LIST
+    def print_linked_list(node): 
         print('[', end='')
-        if len(lst):
-            for i in range(len(lst) - 1):
-                lst[i].print_node(end=', ')
-            lst[-1].print_node(end='')
+        while node:
+            print(node.val, end='')
+            node = node.next
+            if node:
+                print(', ', end='')
         print(']')
 
     @staticmethod
-    def print_reversed_linked_list(lst): # TO CHANGE - I GET ONLY ADDRESS OF THE FIRST ELEMENT OF LINKED LIST
-        print('[', end='')
-        if len(lst):
-            for i in range(len(lst) - 1):
-                lst[len(lst) - 1 - i].print_node(end=', ')
-            lst[0].print_node(end='')
-        print(']')
+    def print_reversed_linked_list(node): 
+        lst = []
+        while node:
+            lst.insert(0, node.val)
+            node = node.next
+        print(lst)
 
     @staticmethod
     def get_number_from_list(lst): # TO CHANGE - I GET ONLY ADDRESS OF THE FIRST ELEMENT OF LINKED LIST
@@ -112,9 +108,9 @@ def main():
     Solution.print_reversed_linked_list(sec)
 
     # solution
-    print(Solution.get_number_from_list(Solution.addTwoNumbers(lst, sec)))
-    print(Solution.get_number_from_list(Solution.addTwoNumbers2(lst, sec)))
-    print(Solution.get_number_from_list(lst) + Solution.get_number_from_list(sec))
+    #print(Solution.get_number_from_list(Solution.addTwoNumbers(lst, sec)))
+    #print(Solution.get_number_from_list(Solution.addTwoNumbers2(lst, sec)))
+    #print(Solution.get_number_from_list(lst) + Solution.get_number_from_list(sec))
 
 
 
