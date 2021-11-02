@@ -4,7 +4,7 @@ def rot(strng):
     ret = ''
     for i in range(ln):
         for j in range(ln):
-            ret += strng[ln * (ln - i) - 1 - j] # + policzyc dokładnie co dodajemy
+            ret += strng[(ln + 1) * (ln - i) - 2 - j] 
         if i < (ln - 1):
             ret += '\n'
 
@@ -19,8 +19,11 @@ def oper(fct, s):
     pass
 
 def main():
-    print('abcd\nefgh\nijkl\nmnop')
-    print(rot('abcd\nefgh\nijkl\nmnop'))
+    print('TESTING rot')
+    print('FIRST TEST \n' + rot('abcd\nefgh\nijkl\nmnop') +' should equal \n"ponm\nlkji\nhgfe\ndcba"')
+    print('SECOND TEST \n' + rot("fijuoo\nCqYVct\nDrPmMJ\nerfpBA\nkWjFUG\nCVUfyL") +' should equal \n"LyfUVC\nGUFjWk\nABpfre\nJMmPrD\ntcVYqC\nooujif"')
+    print('THIRD TEST \n' + rot("rkKv\ncofM\nzXkh\nflCB") +' should equal \n"BClf\nhkXz\nMfoc\nvKkr"')
+
     pass
     
 
