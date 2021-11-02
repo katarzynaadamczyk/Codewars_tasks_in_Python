@@ -15,8 +15,7 @@ def selfie_and_rot(strng):
     pass
 
 def oper(fct, s):
-    # your code
-    pass
+    return fct(s)
 
 def main():
     print('TESTING rot')
