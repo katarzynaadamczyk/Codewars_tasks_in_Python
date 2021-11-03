@@ -1,6 +1,45 @@
 def mix(s1, s2):
-    # your code
-    pass
+    dct1, dct2 = {}, {}
+    
+    for char in s1:
+        dct1.setdefault(char, 0)
+        dct1[char] += 1
+
+    for char in s2:
+        dct2.setdefault(char, 0)
+        dct2[char] += 1
+
+    lst = []
+
+    for key in dct1.keys():
+        if key < 'a' or key > 'z' or dct1[key] < 2:
+            lst.append(key)
+    
+    for key in lst:
+        del dct1[key]
+
+    lst = []
+
+    for key in dct2.keys():
+        if key < 'a' or key > 'z' or dct2[key] < 2:
+            lst.append(key)
+    
+    for key in lst:
+        del dct2[key]
+
+    dct1 = dict(sorted(dct1.items(), key=lambda item: item[1], reverse=True))
+    dct2 = dict(sorted(dct2.items(), key=lambda item: item[1], reverse=True))
+
+    ret = ''
+
+    #while len(dct1.keys()) > 0 or len(dct2.keys()) > 0:
+
+    #    pass
+    print(dct1)
+    print(dct2)
+
+    
+    return ret
 
 
 
