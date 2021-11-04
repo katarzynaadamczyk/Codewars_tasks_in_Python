@@ -41,11 +41,7 @@ def mix(s1, s2):
     for key in dct2.keys():
         arr.append([key, dct2[key], '2'])
 
-    arr = sorted(arr, key=lambda x: (-x[1], x[2], x[0]))
-    ret = ''
-    for row in arr:
-        ret += row[2] + ':' + row[1] * row[0] + '/'
-    return ret if len(ret) == 0 else ret[0:len(ret) - 1]
+    return '/'.join([row[2] + ':' + row[0] * row[1] for row in sorted(arr, key=lambda x: (-x[1], x[2], x[0]))])
 
 def main():
     print('TESTS:\n')
