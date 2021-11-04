@@ -1,99 +1,51 @@
-def mix(s1, s2):
-    dct1, dct2 = {}, {}
+def create_dict(s): # func to create a dict with lowercase keys and its number of appearances > 1 in given string
+    dct = {}
     
-    for char in s1:
-        dct1.setdefault(char, 0)
-        dct1[char] += 1
+    for char in s:
+        dct.setdefault(char, 0)
+        dct[char] += 1
 
-    for char in s2:
-        dct2.setdefault(char, 0)
-        dct2[char] += 1
+    lst1 = []
 
-    lst = []
+    for key in dct.keys():
+        if key < 'a' or key > 'z' or dct[key] < 2:
+            lst1.append(key)
+    
+    for key in lst1:
+        del dct[key]
+    
+    return dct
 
+def mix(s1, s2): 
+    dct1 = create_dict(s1)
+    dct2 = create_dict(s2)
+    sign = ''
+    val = 0
+    arr = []
     for key in dct1.keys():
-        if key < 'a' or key > 'z' or dct1[key] < 2:
-            lst.append(key)
-    
-    for key in lst:
-        del dct1[key]
-
-    lst = []
-
-    for key in dct2.keys():
-        if key < 'a' or key > 'z' or dct2[key] < 2:
-            lst.append(key)
-    
-    for key in lst:
-        del dct2[key]
-
-    dct1 = dict(sorted(dct1.items(), key=lambda x: (-x[1], x[0])))
-    dct2 = dict(sorted(dct2.items(), key=lambda x: (-x[1], x[0])))
-
-    ret, sign = '', ''
-
-    while len(dct1.keys()) > 0 or len(dct2.keys()) > 0:
-        if len(dct1.keys()) == 0:
-            for key in dct2.keys():
-                ret = ret + '2:' + dct2[key] * key + '/'
-            dct2 = {}
-        elif len(dct2.keys()) == 0:
-            for key in dct1.keys():
-                ret = ret + '1:' + dct1[key] * key + '/'
-            dct1 = {}
-        elif dct1[list(dct1.keys())[0]] > dct2[list(dct2.keys())[0]]:
-            key = list(dct1.keys())[0]
-            if key in dct2.keys():
-                if dct2[key] == dct1[key]:
-                    sign = '='
-                else:
-                    sign = '1'
-                del dct2[key]
+        if key in dct2.keys():
+            if dct2[key] > dct1[key]:
+                sign = '2'
+                val = dct2[key]
+            elif dct2[key] == dct1[key]:
+                sign = '='
+                val = dct2[key]
             else:
                 sign = '1'
-            ret += sign + ':' + key * dct1[key] + '/'
-            del dct1[key]
-        elif dct1[list(dct1.keys())[0]] == dct2[list(dct2.keys())[0]]:
-            if list(dct1.keys())[0] < list(dct2.keys())[0]:
-                key = list(dct1.keys())[0]
-                if key in dct2.keys():
-                    if dct2[key] == dct1[key]:
-                        sign = '='
-                    else:
-                        sign = '1'
-                    del dct2[key]
-                else:
-                    sign = '1'
-                ret += sign + ':' + key * dct1[key] + '/'
-                del dct1[key]
-            else:
-                key = list(dct2.keys())[0]
-                if key in dct1.keys():
-                    if dct2[key] == dct1[key]:
-                        sign = '='
-                    else:
-                        sign = '2'
-                    del dct1[key]
-                else:
-                    sign = '2'
-                ret += sign + ':' + key * dct2[key] + '/'
-                del dct2[key]
-        else:
-            key = list(dct2.keys())[0]
-            if key in dct1.keys():
-                if dct2[key] == dct1[key]:
-                    sign = '='
-                else:
-                    sign = '2'
-                del dct1[key]
-            else:
-                sign = '2'
-            ret += sign + ':' + key * dct2[key] + '/'
+                val = dct1[key]
             del dct2[key]
-    
+        else:
+            sign = '1'
+            val = dct1[key]
+        arr.append([key, val, sign])
+    for key in dct2.keys():
+        arr.append([key, dct2[key], '2'])
+
+    arr = sorted(arr, key=lambda x: (-x[1], x[2], x[0]))
+    ret = ''
+    for row in arr:
+        ret += row[2] + ':' + row[1] * row[0] + '/'
     return ret if len(ret) == 0 else ret[0:len(ret) - 1]
-
-
 
 def main():
     print('TESTS:\n')
