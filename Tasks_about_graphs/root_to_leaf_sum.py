@@ -11,15 +11,12 @@ class TreeNode:
 class Solution:
     @staticmethod
     def rek(num, node, count):
-        print(f'num: {num}')
-        print(f'count: {count}')
-        print(f'node.val: {node.val}')
         if node.right is None and node.left is None:
-            return num, node, count + num * 10 + node.val
+            return num // 10, node, count + num * 10 + node.val
         if node.right is not None:
             num, node2, count = Solution.rek(num * 10 + node.val, node.right, count)
         if node.left is not None:
-            num, node2, count = Solution.rek(num, node.left, count)
+            num, node2, count = Solution.rek(num * 10 + node.val, node.left, count)
         return num // 10, node, count
 
     @staticmethod
@@ -28,14 +25,11 @@ class Solution:
         return count
 
 
-
-
 def main():
     three = TreeNode(3)
     two = TreeNode(2)
-    one = TreeNode(1, three)
+    one = TreeNode(1, three, two)
     print(Solution.sumNumbers(one))
-    pass
     
 
 if __name__ == '__main__':
