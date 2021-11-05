@@ -71,6 +71,7 @@ Solution to problems regarding arrays.
 ## Tasks_about_graphs:
 Solutions to problems with graphs.
 * max_sum - Given an undirected graph consisting of N vertices, numbered from 1 to N, and M edges. The graph is described by two arrays, A and B, both of length M. A pair (A[K], B[K]), for K from 0 to M-1, describes an edge between vertex A[K] and vertex B[K]. Task is to assign all values from the range [1, N] to the vertices of the graph in such a way that one number is given to one vertice and sum over all edges of the values at the edges' endpoints is maximal. 
+* root_to_leaf_sum - Solution to following problem found on LeetCode: https://leetcode.com/problems/sum-root-to-leaf-numbers/
 
 ## Tasks_about_strings:
 Solutions to problems with strings.
