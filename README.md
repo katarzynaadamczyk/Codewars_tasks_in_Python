@@ -67,6 +67,7 @@ Solution to following problem found on Codewars: https://www.codewars.com/kata/5
 Solution to problems regarding arrays.
 * Circles - my solution to following problem: You are given n numbers on a circle, described by an array A. Find the maximum number of neighbouring pairs whose sums are even. One element can belong to only one pair.
 * Minimum_moves - my solution to problem found on: https://leetcode.com/problems/minimum-moves-to-equal-array-elements-ii
+* two_sum - my solution to problem found on: https://leetcode.com/problems/two-sum/
 
 ## Tasks_about_graphs:
 Solutions to problems with graphs.
