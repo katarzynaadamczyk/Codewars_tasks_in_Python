@@ -35,6 +35,17 @@ class Solution_v2:
                 return int(sum + str(root.val))
             return rek(root.right, sum + str(root.val)) + rek(root.left, sum + str(root.val))
         return rek(root, '')
+    
+class Solution_v3:
+    @staticmethod
+    def sumNumbers(root: Optional[TreeNode]) -> int:
+        def rek(root: Optional[TreeNode], sum: str) -> str:
+            if not root:
+                return 0
+            if not root.left and not root.right:
+                return sum + str(root.val)
+            return int(rek(root.right, sum + str(root.val))) + int(rek(root.left, sum + str(root.val)))
+        return rek(root, '')
 
 
 def main():
@@ -43,6 +54,7 @@ def main():
     one = TreeNode(1, three, two)
     print(Solution.sumNumbers(one))
     print(Solution_v2.sumNumbers(one))
+    print(Solution_v3.sumNumbers(one))
     
 
 if __name__ == '__main__':
