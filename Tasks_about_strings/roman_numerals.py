@@ -1,10 +1,28 @@
 class RomanNumerals:
     
     roman_dict = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
-
+    rroman_dict = {1000: 'M', 500: 'D', 100: 'C', 50: 'L', 10: 'X', 5: 'V', 1: 'I'}
+    rroman_dict_keys = [1000, 500, 100, 50, 10, 5, 1]
     
     def to_roman(val):
-        return ''
+        if val == 4000:
+            return 'MMMM'
+        ret = ''
+        for i in range(0, len(RomanNumerals.rroman_dict_keys), 2):
+            ret += val // RomanNumerals.rroman_dict_keys[i] * RomanNumerals.rroman_dict[RomanNumerals.rroman_dict_keys[i]]
+            val = val % RomanNumerals.rroman_dict_keys[i]
+            if i < (len(RomanNumerals.rroman_dict_keys) - 1):
+                if val // RomanNumerals.rroman_dict_keys[i + 2] == 9:
+                    ret += RomanNumerals.rroman_dict[RomanNumerals.rroman_dict_keys[i + 2]] + RomanNumerals.rroman_dict[RomanNumerals.rroman_dict_keys[i]]
+                    val -= 9 * RomanNumerals.rroman_dict_keys[i + 2]
+                elif val // RomanNumerals.rroman_dict_keys[i + 1]:
+                    ret += RomanNumerals.rroman_dict[RomanNumerals.rroman_dict_keys[i + 1]]
+                    val -= RomanNumerals.rroman_dict_keys[i + 1]
+                elif val // RomanNumerals.rroman_dict_keys[i + 2] == 4:
+                    ret += RomanNumerals.rroman_dict[RomanNumerals.rroman_dict_keys[i + 2]] + RomanNumerals.rroman_dict[RomanNumerals.rroman_dict_keys[i + 1]]
+                    val -= 4 * RomanNumerals.rroman_dict_keys[i + 2]
+            
+        return ret
 
     def from_roman(roman_num):
         if len(roman_num):
