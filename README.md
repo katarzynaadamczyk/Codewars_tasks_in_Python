@@ -11,6 +11,7 @@ Some interesting tasks I found and solved them using Python 3. This project is u
 * [Determine_if_number](#Determine_if_number)
 * [Int32_to_IPv4](#Int32_to_IPv4)
 * [Irreducible_sum_of_rationals](#Irreducible_sum_of_rationals)
+* [Linked_lists](#Linked_lists)
 * [Password_cracker](#Password_cracker)
 * [Play_with_arrays](#Play_with_arrays)
 * [Tasks_about_graphs](#Tasks_about_graphs)
@@ -27,9 +28,6 @@ Some interesting tasks I found and solved them using Python 3. This project is u
 
 ## Automate_the_boring_stuff
 My solutions to projects described in 'Automate the boring stuff with Python' by Albert Sweigart. Each individual .py file solves problem given at the end of its title's chapter (e.g. chapter_3.py solves problem described at the end of chapter 3, etc.). 
-
-## Add_two_numbers
-My solutions to problem found on leetcode.com: https://leetcode.com/problems/add-two-numbers/.
 
 ## Caesar_2:
 Second variation on Ceasar cipher, task from codewars.com (https://www.codewars.com/kata/55084d3898b323f0aa000546).
@@ -60,12 +58,17 @@ Solution to following problem found on Codewars: https://www.codewars.com/kata/5
 ## Irreducible_sum_of_rationals:
 Solution to following problem found on Codewars: https://www.codewars.com/kata/5517fcb0236c8826940003c9
 
+## Linked_lists:
+* add_two_numbers: my solutions to problem found on leetcode.com: https://leetcode.com/problems/add-two-numbers/
+* remove_elements: my solution to problem found on: https://leetcode.com/problems/remove-linked-list-elements/
+
 ## Password_cracker:
 Solution to following problem found on Codewars: https://www.codewars.com/kata/59146f7b4670ba520900000a
 
 ## Play_with_arrays:
 Solution to problems regarding arrays.
 * Circles - my solution to following problem: You are given n numbers on a circle, described by an array A. Find the maximum number of neighbouring pairs whose sums are even. One element can belong to only one pair.
+* median_of_two_sorted_arrays - my solution to problem found on: https://leetcode.com/problems/median-of-two-sorted-arrays/
 * Minimum_moves - my solution to problem found on: https://leetcode.com/problems/minimum-moves-to-equal-array-elements-ii
 * two_sum - my solution to problem found on: https://leetcode.com/problems/two-sum/
 
