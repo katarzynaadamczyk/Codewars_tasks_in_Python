@@ -1,4 +1,6 @@
 import time
+import numpy as np
+from typing import List
 
 def measuretime(func):
     def wrapper(*args, **kwargs):
@@ -40,10 +42,31 @@ def fib_v2(n):
         return fib_v2(n - 1) + fib_v2(n - 2)
     return fib_v2(n + 2) - fib_v2(n + 1)
 
-# third solution - hope to be good
-def fib_v3(n):
-    pass
-
+# third solution - using numpy
+@measuretime
+def fib_v3(n: int) -> int:
+    if n == 0:
+        return 0
+    if n == 1 or n == 2:
+        return 1
+    if n - 2 > 2:
+        def fib_log(a: int, b: int, c: int, d: int, n: int) -> List[int]:
+            tab1 = np.array([[a, b], [c, d]])
+            ret = np.array([[1, 0], [0, 1]])
+            while n > 0:
+                if n % 2 == 0:
+                    ret = np.matmul(ret, tab1, tab1)
+                    n = n // 2
+                else:
+                    ret = np.matmul(tab1, ret)
+                    n -= 1
+            return ret
+        tab = fib_log(0, 1, 1, 1, n - 2)
+        print(tab)
+        tab = np.matmul(tab, np.array([[0], [1]]))
+        return sum(tab)
+        
+    return -1
 
 def main():
     for n in range(-10, 31, 5):
@@ -51,6 +74,8 @@ def main():
         print(f'First sol for {n} is {result}')
         result = measuretime2(fib_v2, n)
         print(f'Second sol for {n} is {result}')
+    result = fib_v3(10)
+    print(f'Third sol for 10 is {result[0]}')
     
 
 if __name__ == '__main__':
