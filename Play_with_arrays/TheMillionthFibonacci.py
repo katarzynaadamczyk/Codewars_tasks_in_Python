@@ -53,6 +53,7 @@ def fib_v3(n: int) -> int:
         def fib_log(a: int, b: int, c: int, d: int, n: int) -> List[int]:
             tab1 = np.array([[a, b], [c, d]])
             ret = np.array([[1, 0], [0, 1]])
+            m = 0
             while n > 0:
                 if n % 2 == 0:
                     ret = np.matmul(ret, tab1, tab1)
@@ -60,13 +61,32 @@ def fib_v3(n: int) -> int:
                 else:
                     ret = np.matmul(tab1, ret)
                     n -= 1
+                m += 1
+            print(f'Count of steps: {m}')
             return ret
         tab = fib_log(0, 1, 1, 1, n - 2)
         print(tab)
         tab = np.matmul(tab, np.array([[0], [1]]))
-        return sum(tab)
-        
-    return -1
+        return np.sum(tab)
+    else:
+        def fib_log(a: int, b: int, c: int, d: int, n: int) -> List[int]:
+            tab1 = np.array([[a, b], [c, d]])
+            ret = np.array([[1, 0], [0, 1]])
+            m = 0
+            while n < 0:
+                if n % 2 == 0:
+                    ret = np.matmul(ret, tab1, tab1)
+                    n = n // 2
+                else:
+                    ret = np.matmul(tab1, ret)
+                    n += 1
+                m += 1
+            print(f'Count of steps: {m}')
+            return ret
+        tab = fib_log(0, 1, 1, -1, n - 2)
+        print(tab)
+        tab = np.matmul(tab, np.array([[1], [0]]))
+        return np.sum(tab)
 
 def main():
     for n in range(-10, 31, 5):
@@ -75,7 +95,9 @@ def main():
         result = measuretime2(fib_v2, n)
         print(f'Second sol for {n} is {result}')
     result = fib_v3(10)
-    print(f'Third sol for 10 is {result[0]}')
+    print(f'Third sol for 10 is {result}')
+    result = fib_v3(-5)
+    print(f'Third sol for -5 is {result}')
     
 
 if __name__ == '__main__':
