@@ -42,7 +42,7 @@ def fib_v2(n):
         return fib_v2(n - 1) + fib_v2(n - 2)
     return fib_v2(n + 2) - fib_v2(n + 1)
 
-# third solution - using numpy
+# third solution - using numpy negative not working well, 
 @measuretime
 def fib_v3(n: int) -> int:
     if n == 0:
@@ -67,6 +67,7 @@ def fib_v3(n: int) -> int:
         tab = fib_log(0, 1, 1, 1, n - 2)
         print(tab)
         tab = np.matmul(tab, np.array([[0], [1]]))
+        print(tab)
         return np.sum(tab)
     else:
         def fib_log(a: int, b: int, c: int, d: int, n: int) -> List[int]:
@@ -83,13 +84,14 @@ def fib_v3(n: int) -> int:
                 m += 1
             print(f'Count of steps: {m}')
             return ret
-        tab = fib_log(0, 1, 1, -1, n - 2)
+        tab = fib_log(0, 1, 1, 1, n + 1)
         print(tab)
-        tab = np.matmul(tab, np.array([[1], [0]]))
+        tab = np.matmul(tab, np.array([[0], [1]]))
+        print(tab)
         return np.sum(tab)
 
 def main():
-    for n in range(-10, 31, 5):
+    for n in range(-10, 0):
         result = fib(n)
         print(f'First sol for {n} is {result}')
         result = measuretime2(fib_v2, n)
