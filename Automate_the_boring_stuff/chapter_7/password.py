@@ -13,6 +13,7 @@ def checkPassword(password):
     smallLettersRegex = re.compile(r'[a-z]')
     numbersRegex = re.compile(r'[0-9]')
     if passwordRegex.findall(password):
+        print(passwordRegex.findall(password))
         if bigLettersRegex.findall(password) and smallLettersRegex.findall(password) \
             and numbersRegex.findall(password):
             return True

@@ -4,14 +4,13 @@ import re
 
 def abbreviate(words):
     ret = ''
-    word_regex = re.compile(r'\W*\w+(\'s)?\W*')
+    word_regex = re.compile(r"[^a-zA-Z0-9]*\w+'?s?")
     for word in words.split():
-        print(re.match(r'^\W*\w+(\'s)?\W*$', word))
-        if re.match(r'^\W*\w+(\'s)?\W*$', word):
+        for match in word_regex.findall(word):
             index = 0
-            while not word[index].isalpha():
+            while not match[index].isalpha():
                 index += 1
-            ret += word[index].upper()
+            ret += match[index].upper()
     return ret
 
 if __name__ == '__main__':
@@ -24,5 +23,6 @@ if __name__ == '__main__':
         assert abbreviate("Halley's Comet") == "HC"
         assert abbreviate("The Road _Not_ Taken") == "TRNT"
         assert abbreviate("Complementary metal-oxide semiconductor") == "CMOS"
+        print('All well done')
     except AssertionError as e:
-        print(e, e.args)
+        print('Assertion Error')
