@@ -23,12 +23,18 @@ operations = {'plus': plus,
 
 def answer(question):
     number_regex = re.compile(r'-?[0-9]+')
-    question_regex = re.compile(r'^What is (-?[0-9]+)(.*(-?[0-9]+))*\?$')
+    question_regex = re.compile(r'^What is.*\?')
+    texts_regex = re.compile('|'.join(['^What', 'is'] + list(operations.keys()))) # rozdzielić by
     numbers = number_regex.findall(question)
-    if not question_regex.match(question):
+    texts = texts_regex.findall(question)
+    print(texts)
+    print((re.findall(r'[A-Za-z]+', question)))
+    if not question_regex.match(question) or len(texts) != len(re.findall(r'[A-Za-z]+', question)):
         raise ValueError('unknown operation')
+    if len(numbers) == 0:
+        raise ValueError('syntax error')
     result = int(numbers[0])
-    operations_regex = re.compile(r'(-?[0-9]+) (plus|minus|multiplied by|divided by) (-?[0-9]+)')
+    operations_regex = re.compile(r'(-?[0-9]+) (' + '|'.join(operations.keys()) + ') (-?[0-9]+)')
     question = question[len('What is '):-1]
     while len(question) > len(numbers[-1]):
         operation = operations_regex.findall(question)
@@ -38,7 +44,6 @@ def answer(question):
         else:
             raise ValueError('syntax error')
     return result
-
 
 if __name__ == '__main__':
     print(answer('What is 5?'))
@@ -50,5 +55,9 @@ if __name__ == '__main__':
         print(e.args)
     try:
         print(answer('Who is the president?'))
+    except ValueError as e:
+        print(e.args)
+    try:
+        print(answer("What is 2 2 minus 3?"))
     except ValueError as e:
         print(e.args)
