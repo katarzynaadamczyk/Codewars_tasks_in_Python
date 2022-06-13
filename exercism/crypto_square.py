@@ -17,14 +17,11 @@ def cipher_text(plain_text):
             new_text += char.lower()
     # count c and r
     c, r = get_c_r(len(new_text))
-    print(new_text)
-    print(c, r, len(new_text))
-    result = [new_text[r_index * c:(r_index + 1) * c].ljust(c) for r_index in range(r)]
-    new_result = ['' for _ in range(c)]
-    for verse in result:
-        for c_index in range(len(verse)):
-            new_result[c_index] += verse[c_index]
-    return ' '.join(new_result)
+    # reshape the text
+    new_text = new_text.ljust(r * c)
+    # get the result array
+    result = [new_text[c_index::c] for c_index in range(c)]
+    return ' '.join(result)
 
 if __name__ == '__main__':
     print(cipher_text("Chill out."))
