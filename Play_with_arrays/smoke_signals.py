@@ -10,27 +10,50 @@ my solution to task: https://www.codewars.com/kata/62a3855fcaec090025ed2a9a
 #   (["5.1"],["Orange army retreats"])
 #]
 
+
+
+from numpy import sign
+
+
 def common_signal(lst1, lst2):
     return set(lst1) & set(lst2)
+
+def common_event(lst1, lst2):
+    for event in lst1:
+        if event in lst2:
+            return event
+    return None
 
 def decode_smoke_signals(days):
     ret_dict = dict()
     signals_to_check = set()
-    for line in days:
-        if len(line[0]) == 1:
-            ret_dict.setdefault(line[0][0], line[1][0])
-            signals_to_check.discard(line[0][0])
+    signals_to_remove = []
+    # list the signals to check & start filling the result dictionary
+    for line_number in range(len(days)):
+        if len(days[line_number][0]) == 1:
+            ret_dict.setdefault(days[line_number][0][0], days[line_number][1][0])
+            signals_to_check.discard(days[line_number][0][0])
+            signals_to_remove.append(days[line_number][0][0])
         else:
-            for elem in line[0]:
+            for elem in days[line_number][0]:
                 if elem not in ret_dict.keys():
                     signals_to_check.add(elem)
+    while len(signals_to_check) > 0:
+        # shorten days of signals that are already in the dictionary
+        for signal in signals_to_remove:
+            for line in days:
+                if signal in line[0]:
+                    line[0].remove(signal)
+                    line[1].remove(ret_dict[signal])
+        signals_to_remove = []
+        # sprawdź czy są 'jedynki', jeśli tak to usuń pierwszą jedynkę z setu
+        # jeśli nie to szukaj takich co mają tylko jeden wspólny z innym wspólnym
+        # to co udało się znaleźć usuń z setu
+        break
     
-    print(ret_dict)
-    print(signals_to_check)
     return ret_dict
 
-
-if __name__ == '__main__':
+def tests():
     print('first test:')
     print(decode_smoke_signals([(["2"],["Convoy attacked"])]))
     print('should equal: {"2": "Convoy attacked"}')
@@ -54,4 +77,11 @@ if __name__ == '__main__':
             "8.2.1": "General assassinated",\
             "9.3": "Push into the mountains",\
             "2.2": "Orange army retreats"}')
+    
+
+
+
+if __name__ == '__main__':
+    tests()
+    print(common_signal(['abs', 'abc', 'dfg'], ['abs', 'bcd', 'aab']))
     
