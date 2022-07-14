@@ -40,8 +40,8 @@ def decode_smoke_signals(days):
         for signal in signals_to_remove:
             for index, line in enumerate(days):
                 while signal in line[0]:
-                    line[0].remove(signal)
-                    line[1].remove(ret_dict[signal])
+                    days[index][0].remove(signal)
+                    days[index][1].remove(ret_dict[signal])
                     if len(line[0]) == 0:
                         lines_to_remove.add(index)
         # TODO -> usuwac kolejne linie z days wg lines_to_remove
@@ -52,7 +52,7 @@ def decode_smoke_signals(days):
         # (4) to co udało się znaleźć usuń z setu i usuń z days
         # pytanie czy nie da się połączyć (1) i (2) w jedno
         break
-    
+    print(days)
     return ret_dict
 
 def tests():
@@ -84,8 +84,7 @@ def tests():
 
 
 if __name__ == '__main__':
-    #tests()
-    #print(common_signal(['abs', 'abc', 'dfg'], ['abs', 'bcd', 'aab']))
+    tests()
+    print(common_signal(['abs', 'abc', 'dfg'], ['abs', 'bcd', 'aab']))
     
-    times_lst_comp = %timeit lst = [x for x in range(51)]
     
