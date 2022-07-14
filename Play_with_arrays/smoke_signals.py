@@ -11,10 +11,6 @@ my solution to task: https://www.codewars.com/kata/62a3855fcaec090025ed2a9a
 #]
 
 
-
-from numpy import sign
-
-
 def common_signal(lst1, lst2):
     return set(lst1) & set(lst2)
 
@@ -40,15 +36,21 @@ def decode_smoke_signals(days):
                     signals_to_check.add(elem)
     while len(signals_to_check) > 0:
         # shorten days of signals that are already in the dictionary
+        lines_to_remove = set()
         for signal in signals_to_remove:
-            for line in days:
-                if signal in line[0]:
+            for index, line in enumerate(days):
+                while signal in line[0]:
                     line[0].remove(signal)
                     line[1].remove(ret_dict[signal])
+                    if len(line[0]) == 0:
+                        lines_to_remove.add(index)
+        # TODO -> usuwac kolejne linie z days wg lines_to_remove
         signals_to_remove = []
-        # sprawdź czy są 'jedynki', jeśli tak to usuń pierwszą jedynkę z setu
-        # jeśli nie to szukaj takich co mają tylko jeden wspólny z innym wspólnym
-        # to co udało się znaleźć usuń z setu
+        # (1) sprawdź czy są 'jedynki', jeśli tak to usuń pierwszą jedynkę z setu
+        # (2) jeśli nie to szukaj takich co mają tylko jeden wspólny z innym wspólnym
+        # (3) jeśli nie to break
+        # (4) to co udało się znaleźć usuń z setu i usuń z days
+        # pytanie czy nie da się połączyć (1) i (2) w jedno
         break
     
     return ret_dict
@@ -82,6 +84,8 @@ def tests():
 
 
 if __name__ == '__main__':
-    tests()
-    print(common_signal(['abs', 'abc', 'dfg'], ['abs', 'bcd', 'aab']))
+    #tests()
+    #print(common_signal(['abs', 'abc', 'dfg'], ['abs', 'bcd', 'aab']))
+    
+    times_lst_comp = %timeit lst = [x for x in range(51)]
     
