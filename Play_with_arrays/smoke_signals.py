@@ -14,29 +14,53 @@ my solution to task: https://www.codewars.com/kata/62a3855fcaec090025ed2a9a
 def common_signal(lst1, lst2):
     return set(lst1) & set(lst2)
 
+
 def common_event(lst1, lst2):
     for event in lst1:
         if event in lst2:
             return event
     return None
 
+
+# function that finds all lines of length equal to 1
+def find_lines_len_one(days):
+    lines = set()
+    for line_number, line in enumerate(days):
+        if len(set(line[0])) == 1:
+            lines.add(line_number)
+    return lines 
+
+
+# function that finds first common signal within two lines
+def find_first_common_signal(days):
+    for index_1 in range(len(days)):
+        for index_2 in range(index_1 + 1, len(days)):
+            common_signals = common_signal(days[index_1][0], days[index_2][0])
+            if len(common_signals) == 1:
+                return [list(common_signals)[0], common_event(days[index_1][1], days[index_2][1])]
+    return None
+
+
 def decode_smoke_signals(days):
     ret_dict = dict()
-    signals_to_check = set()
-    signals_to_remove = []
-    # list the signals to check & start filling the result dictionary
-    for line_number in range(len(days)):
-        if len(days[line_number][0]) == 1:
-            ret_dict.setdefault(days[line_number][0][0], days[line_number][1][0])
-            signals_to_check.discard(days[line_number][0][0])
-            signals_to_remove.append(days[line_number][0][0])
+    while True:
+        # (1) sprawdź czy są 'jedynki', jeśli tak to usuń pierwszą jedynkę z setu
+        signals_to_remove = set()
+        lines_to_remove = find_lines_len_one(days)
+        if len(lines_to_remove) > 0:
+            for line in lines_to_remove:
+                signals_to_remove.add(days[line][0][0])
+                ret_dict.setdefault(days[line][0][0], days[line][1][0])
         else:
-            for elem in days[line_number][0]:
-                if elem not in ret_dict.keys():
-                    signals_to_check.add(elem)
-    while len(signals_to_check) > 0:
+            # (2) jeśli nie to szukaj takich co mają tylko jeden wspólny z innym wspólnym
+            common_signal = find_first_common_signal(days)
+            # (3) jeśli nie to break
+            if common_signal is None:
+                break
+            signals_to_remove.add(common_signal[0])
+            ret_dict.setdefault(common_signal[0], common_signal[1])
+        
         # shorten days of signals that are already in the dictionary
-        lines_to_remove = set()
         for signal in signals_to_remove:
             for index, line in enumerate(days):
                 while signal in line[0]:
@@ -44,15 +68,10 @@ def decode_smoke_signals(days):
                     days[index][1].remove(ret_dict[signal])
                     if len(line[0]) == 0:
                         lines_to_remove.add(index)
-        # TODO -> usuwac kolejne linie z days wg lines_to_remove
-        signals_to_remove = []
-        # (1) sprawdź czy są 'jedynki', jeśli tak to usuń pierwszą jedynkę z setu
-        # (2) jeśli nie to szukaj takich co mają tylko jeden wspólny z innym wspólnym
-        # (3) jeśli nie to break
-        # (4) to co udało się znaleźć usuń z setu i usuń z days
-        # pytanie czy nie da się połączyć (1) i (2) w jedno
-        break
-    print(days)
+        # delete lines from days accordingly with lines_to_remove
+        for line_to_remove in sorted(list(lines_to_remove), reverse=True):
+            del days[line_to_remove]
+            
     return ret_dict
 
 def tests():
@@ -85,6 +104,5 @@ def tests():
 
 if __name__ == '__main__':
     tests()
-    print(common_signal(['abs', 'abc', 'dfg'], ['abs', 'bcd', 'aab']))
     
     
