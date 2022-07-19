@@ -32,6 +32,9 @@ def find_lines_len_one(days):
 
 
 # function that finds first common signal within two lines
+# here hides a mistake, please look carefully
+# można jeszcze zrobić tak, że jak już nie ma pojedynczych wartosci to zrobić nowe days ->
+# porobić wspolne z kazdej linii z kazda i wtedy może by coś wyszło dopiero z poniższego algorytmu
 def find_first_common_signal(days):
     for index_1 in range(len(days)):
         for index_2 in range(index_1 + 1, len(days)):
@@ -61,11 +64,12 @@ def decode_smoke_signals(days):
             ret_dict.setdefault(common_signal[0], common_signal[1])
         
         # shorten days of signals that are already in the dictionary
+# here hides a mistake, please look carefully
         for signal in signals_to_remove:
             for index, line in enumerate(days):
                 while signal in line[0]:
                     days[index][0].remove(signal)
-                    days[index][1].remove(ret_dict[signal])
+                    days[index][1].remove(ret_dict[signal]) # here I got some informations that there is a mistake
                     if len(line[0]) == 0:
                         lines_to_remove.add(index)
         # delete lines from days accordingly with lines_to_remove
@@ -98,7 +102,19 @@ def tests():
             "8.2.1": "General assassinated",\
             "9.3": "Push into the mountains",\
             "2.2": "Orange army retreats"}')
-    
+    print()
+    print('4th test')
+    print(decode_smoke_signals([(['9.9.2', '5.6.6', '2.6', '8.2'], 
+                                 ['Medical helicopters spotted', 'Pizza delivery spotted', 'Orange army charges', 'Infantry spotted']), 
+                                (['2.6', '8.9.3', '9', '9.9.2', '5.2.3', '8.2'], 
+                                 ['Ceasefire called', 'Infantry spotted', 'Medical helicopters spotted', 'Tanks spotted', 'Ceasefire called', 'Orange army charges']), 
+                                (['9', '9.9.2', '8.9.3', '8.2', '8.3'], 
+                                 ['Ceasefire called', 'Ambush in the jungle', 'Orange army charges', 'Ceasefire called', 'Infantry spotted']), 
+                                (['2.6', '5.6.6', '5.2.3', '8.2'], 
+                                 ['Pizza delivery spotted', 'Medical helicopters spotted', 'Orange army charges', 'Tanks spotted'])]))
+    print("should equal {'8.2': 'Orange army charges', '8.3': 'Ambush in the jungle', '9': \
+        'Ceasefire called', '8.9.3': 'Ceasefire called', '5.2.3': 'Tanks spotted', \
+        '2.6': 'Medical helicopters spotted', '5.6.6': 'Pizza delivery spotted', '9.9.2': 'Infantry spotted'}")
 
 
 
