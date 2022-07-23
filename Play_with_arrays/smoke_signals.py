@@ -11,8 +11,11 @@ my solution to task: https://www.codewars.com/kata/62a3855fcaec090025ed2a9a
 #]
 
 
-def common_signal(lst1, lst2):
-    return set(lst1) & set(lst2)
+from numpy import sign
+
+
+def common_signals(lst1, lst2):
+    return list(set(lst1) & set(lst2))
 
 
 def common_event(lst1, lst2):
@@ -38,15 +41,30 @@ def find_lines_len_one(days):
 def find_first_common_signal(days):
     for index_1 in range(len(days)):
         for index_2 in range(index_1 + 1, len(days)):
-            common_signals = common_signal(days[index_1][0], days[index_2][0])
+            common_signals = common_signals(days[index_1][0], days[index_2][0])
             if len(common_signals) == 1:
                 return [list(common_signals)[0], common_event(days[index_1][1], days[index_2][1])]
     return None
 
 
+def find_common_signals(days):
+    new_days = []
+    for index_1 in range(len(days)):
+        for index_2 in range(index_1 + 1, len(days)):
+            signals = common_signals(days[index_1][0], days[index_2][0])
+            if len(signals) > 0:
+                events = []
+                for event in days[index_1][1]:
+                    if event in days[index_2][1]:
+                        events.append(event)
+                if len(events) == len(signals):
+                    new_days.append((signals, events))
+    return new_days
+
+
 def decode_smoke_signals(days):
     ret_dict = dict()
-    while True:
+    while len(days) > 0:
         # (1) sprawdź czy są 'jedynki', jeśli tak to usuń pierwszą jedynkę z setu
         signals_to_remove = set()
         lines_to_remove = find_lines_len_one(days)
@@ -56,15 +74,21 @@ def decode_smoke_signals(days):
                 ret_dict.setdefault(days[line][0][0], days[line][1][0])
         else:
             # (2) jeśli nie to szukaj takich co mają tylko jeden wspólny z innym wspólnym
-            common_signal = find_first_common_signal(days)
+            # common_signal = find_first_common_signal(days)
+            common_sgnls = find_common_signals(days)
             # (3) jeśli nie to break
-            if common_signal is None:
+            if len(common_sgnls) == 0:
                 break
-            signals_to_remove.add(common_signal[0])
-            ret_dict.setdefault(common_signal[0], common_signal[1])
+            print(days)
+            print(common_sgnls)
+            for line in range(len(common_sgnls)):
+                if len(set(common_sgnls[line][1])) == 1:
+                    for signal in common_sgnls[line][0]:
+                        signals_to_remove.add(signal)
+                        ret_dict.setdefault(signal, common_sgnls[line][1][0])
+                        
         
         # shorten days of signals that are already in the dictionary
-# here hides a mistake, please look carefully
         for signal in signals_to_remove:
             for index, line in enumerate(days):
                 while signal in line[0]:
@@ -120,5 +144,13 @@ def tests():
 
 if __name__ == '__main__':
     tests()
-    
+    # days = [(['9.9.2', '5.6.6', '2.6', '8.2'], ['Medical helicopters spotted', 'Pizza delivery spotted', 'Orange army charges', 'Infantry spotted']), 
+    #        (['2.6', '8.9.3', '9', '9.9.2', '5.2.3', '8.2'], 
+    #         ['Ceasefire called', 'Infantry spotted', 'Medical helicopters spotted', 'Tanks spotted', 'Ceasefire called', 'Orange army charges']), 
+    #        (['9', '9.9.2', '8.9.3', '8.2', '8.3'], 
+    #         ['Ceasefire called', 'Ambush in the jungle', 'Orange army charges', 'Ceasefire called', 'Infantry spotted']), 
+    #        (['2.6', '5.6.6', '5.2.3', '8.2'], 
+    #         ['Pizza delivery spotted', 'Medical helicopters spotted', 'Orange army charges', 'Tanks spotted'])]
+    # print(find_common_signals(days))
+    # print(decode_smoke_signals(days))
     
