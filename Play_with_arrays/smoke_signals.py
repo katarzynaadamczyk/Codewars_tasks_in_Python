@@ -18,6 +18,11 @@ def common_signals(lst1, lst2):
     return list(set(lst1) & set(lst2))
 
 
+def non_common_signals(lst1, lst2):
+    return list(set(lst1) | set(lst2))
+
+
+
 def common_event(lst1, lst2):
     for event in lst1:
         if event in lst2:
@@ -57,9 +62,23 @@ def find_common_signals(days):
                 for event in days[index_1][1]:
                     if event in days[index_2][1]:
                         events.append(event)
+                new_days.append((signals, events))
+    return new_days
+
+def find_non_common_signals(days):
+    new_days = []
+    for index_1 in range(len(days)):
+        for index_2 in range(index_1 + 1, len(days)):
+            signals = non_common_signals(days[index_1][0], days[index_2][0])
+            if len(signals) > 0:
+                events = []
+                for event in days[index_1][1]:
+                    if event not in days[index_2][1]:
+                        events.append(event)
                 if len(events) == len(signals):
                     new_days.append((signals, events))
     return new_days
+    
 
 
 def decode_smoke_signals(days):
@@ -77,8 +96,8 @@ def decode_smoke_signals(days):
             # common_signal = find_first_common_signal(days)
             common_sgnls = find_common_signals(days)
             # (3) jeśli nie to break
-            if len(common_sgnls) == 0:
-                break
+            # break
+            print()
             print(days)
             print(common_sgnls)
             for line in range(len(common_sgnls)):
@@ -86,7 +105,14 @@ def decode_smoke_signals(days):
                     for signal in common_sgnls[line][0]:
                         signals_to_remove.add(signal)
                         ret_dict.setdefault(signal, common_sgnls[line][1][0])
-                        
+            common_sgnls = find_non_common_signals(days)       
+            print()
+            print(common_sgnls)     
+            for line in range(len(common_sgnls)):
+                if len(set(common_sgnls[line][1])) == 1:
+                    for signal in common_sgnls[line][0]:
+                        signals_to_remove.add(signal)
+                        ret_dict.setdefault(signal, common_sgnls[line][1][0])
         
         # shorten days of signals that are already in the dictionary
         for signal in signals_to_remove:
