@@ -19,8 +19,12 @@ def find_unique_smoke_signals(sgnls_dict):
     sgnl_event_dict = {}
     for signal in sgnls_dict.keys():
         if len(sgnls_dict[signal].keys()) == 1:
-            sgnl_event_dict.setdefault(signal, sgnls_dict[signal][sgnls_dict[signal].keys()[0]])
-            
+            sgnl_event_dict.setdefault(signal, list(sgnls_dict[signal].keys())[0])
+    if len(sgnl_event_dict) == 0:
+        # work on it
+        # find a signal with only one outstanding 
+        pass
+    return sgnl_event_dict
 
 
 def decode_smoke_signals(days):
@@ -52,18 +56,20 @@ def decode_smoke_signals(days):
     print(sgnls_dict)
     
     # work on ret_dict
-    n = len(sgnls_dict.keys())
-    i = 0
-    while i < 5 or len(ret_dict.keys()) < n:
-        i += 1
+    while len(sgnls_dict) > 0:
         # (1) find all ones
+        new_ones_dict = find_unique_smoke_signals(sgnls_dict)
         # (2) add them to ret_dict
+        ret_dict = ret_dict | new_ones_dict
         # (3) reduce all other dicts
         # (4) delete them from event_dicts
-        
-        
-
-    
+        for signal, event in new_ones_dict.items():
+            del sgnls_dict[signal]  
+            for new_signal in sgnls_dict.keys():
+                if event in sgnls_dict[new_signal].keys():
+                    sgnls_dict[new_signal][event] -= 1
+                    if sgnls_dict[new_signal][event] <= 0:
+                        del sgnls_dict[new_signal][event]
     return ret_dict
 
 def tests():
