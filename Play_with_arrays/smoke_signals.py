@@ -11,128 +11,68 @@ my solution to task: https://www.codewars.com/kata/62a3855fcaec090025ed2a9a
 #]
 
 
-from numpy import sign
-
-
-def common_signals(lst1, lst2):
-    return list(set(lst1) & set(lst2))
-
-
-def non_common_signals(lst1, lst2):
-    return list(set(lst1) | set(lst2))
-
-
-
-def common_event(lst1, lst2):
-    for event in lst1:
-        if event in lst2:
-            return event
-    return None
-
-
-# function that finds all lines of length equal to 1
-def find_lines_len_one(days):
-    lines = set()
-    for line_number, line in enumerate(days):
-        if len(set(line[0])) == 1:
-            lines.add(line_number)
-    return lines 
-
-
-# function that finds first common signal within two lines
-# here hides a mistake, please look carefully
-# można jeszcze zrobić tak, że jak już nie ma pojedynczych wartosci to zrobić nowe days ->
-# porobić wspolne z kazdej linii z kazda i wtedy może by coś wyszło dopiero z poniższego algorytmu
-def find_first_common_signal(days):
-    for index_1 in range(len(days)):
-        for index_2 in range(index_1 + 1, len(days)):
-            common_signals = common_signals(days[index_1][0], days[index_2][0])
-            if len(common_signals) == 1:
-                return [list(common_signals)[0], common_event(days[index_1][1], days[index_2][1])]
-    return None
-
-
-def find_common_signals(days):
-    new_days = []
-    for index_1 in range(len(days)):
-        for index_2 in range(index_1 + 1, len(days)):
-            signals = common_signals(days[index_1][0], days[index_2][0])
-            if len(signals) > 0:
-                events = []
-                for event in days[index_1][1]:
-                    if event in days[index_2][1]:
-                        events.append(event)
-                new_days.append((signals, events))
-    return new_days
-
-def find_non_common_signals(days):
-    new_days = []
-    for index_1 in range(len(days)):
-        for index_2 in range(index_1 + 1, len(days)):
-            signals = non_common_signals(days[index_1][0], days[index_2][0])
-            if len(signals) > 0:
-                events = []
-                for event in days[index_1][1]:
-                    if event not in days[index_2][1]:
-                        events.append(event)
-                if len(events) == len(signals):
-                    new_days.append((signals, events))
-    return new_days
-    
+def delete_events(events_dict, events_to_delete):
+    for event in events_to_delete:
+        del events_dict[event]
+        
+def find_unique_smoke_signals(sgnls_dict):
+    sgnl_event_dict = {}
+    for signal in sgnls_dict.keys():
+        if len(sgnls_dict[signal].keys()) == 1:
+            sgnl_event_dict.setdefault(signal, sgnls_dict[signal][sgnls_dict[signal].keys()[0]])
+            
 
 
 def decode_smoke_signals(days):
-    ret_dict = dict()
-    while len(days) > 0:
-        # (1) sprawdź czy są 'jedynki', jeśli tak to usuń pierwszą jedynkę z setu
-        signals_to_remove = set()
-        lines_to_remove = find_lines_len_one(days)
-        if len(lines_to_remove) > 0:
-            for line in lines_to_remove:
-                signals_to_remove.add(days[line][0][0])
-                ret_dict.setdefault(days[line][0][0], days[line][1][0])
-        else:
-            # (2) jeśli nie to szukaj takich co mają tylko jeden wspólny z innym wspólnym
-            # common_signal = find_first_common_signal(days)
-            common_sgnls = find_common_signals(days)
-            # (3) jeśli nie to break
-            # break
-            print()
-            print(days)
-            print(common_sgnls)
-            for line in range(len(common_sgnls)):
-                if len(set(common_sgnls[line][1])) == 1:
-                    for signal in common_sgnls[line][0]:
-                        signals_to_remove.add(signal)
-                        ret_dict.setdefault(signal, common_sgnls[line][1][0])
-            common_sgnls = find_non_common_signals(days)       
-            print()
-            print(common_sgnls)     
-            for line in range(len(common_sgnls)):
-                if len(set(common_sgnls[line][1])) == 1:
-                    for signal in common_sgnls[line][0]:
-                        signals_to_remove.add(signal)
-                        ret_dict.setdefault(signal, common_sgnls[line][1][0])
+    ret_dict, sgnls_dict = dict(), dict()
+    # new attempt
+    # add add the events that may be the result of a smoke signal to a dict
+    # example: {'4.3.2': {'Ambush in the jungle': 1, 'Orange army retreat': 2}}
+    # while any of the signals have len(sgnls_dict[signal].keys()) > 1, 
+    # substract the count in the dict when any other has a line of len 1
+    
+    # prepare a dict sgnls_dict
+    for line in days:
+        event_dict = {}
+        for event in line[1]:
+            event_dict.setdefault(event, 0)
+            event_dict[event] += 1
+        for signal in line[0]:
+            if signal not in sgnls_dict.keys():
+                sgnls_dict.setdefault(signal, event_dict.copy())
+            else:
+                events_to_delete = []
+                for event in sgnls_dict[signal].keys():
+                    if event not in line[1]:
+                        sgnls_dict[signal][event] -= 1
+                        if sgnls_dict[signal][event] <= 0:
+                            events_to_delete.append(event)
+                delete_events(sgnls_dict[signal], events_to_delete)
+    
+    print(sgnls_dict)
+    
+    # work on ret_dict
+    n = len(sgnls_dict.keys())
+    i = 0
+    while i < 5 or len(ret_dict.keys()) < n:
+        i += 1
+        # (1) find all ones
+        # (2) add them to ret_dict
+        # (3) reduce all other dicts
+        # (4) delete them from event_dicts
         
-        # shorten days of signals that are already in the dictionary
-        for signal in signals_to_remove:
-            for index, line in enumerate(days):
-                while signal in line[0]:
-                    days[index][0].remove(signal)
-                    days[index][1].remove(ret_dict[signal]) # here I got some informations that there is a mistake
-                    if len(line[0]) == 0:
-                        lines_to_remove.add(index)
-        # delete lines from days accordingly with lines_to_remove
-        for line_to_remove in sorted(list(lines_to_remove), reverse=True):
-            del days[line_to_remove]
-            
+        
+
+    
     return ret_dict
 
 def tests():
+    '''
     print('first test:')
     print(decode_smoke_signals([(["2"],["Convoy attacked"])]))
     print('should equal: {"2": "Convoy attacked"}')
     print()
+    '''
     print('second test:')
     print(decode_smoke_signals([(["4","5.1"],["Ambush in the jungle","Orange army retreats"]),
             (["4","5.1","3.2.1"],["Tanks deployed","Orange army retreats","Ambush in the jungle"]),
