@@ -11,19 +11,29 @@ my solution to task: https://www.codewars.com/kata/62a3855fcaec090025ed2a9a
 #]
 
 
+from unittest import result
+
+
 def delete_events(events_dict, events_to_delete):
     for event in events_to_delete:
         del events_dict[event]
         
 def find_unique_smoke_signals(sgnls_dict):
     sgnl_event_dict = {}
-    for signal in sgnls_dict.keys():
-        if len(sgnls_dict[signal].keys()) == 1:
-            sgnl_event_dict.setdefault(signal, list(sgnls_dict[signal].keys())[0])
-    if len(sgnl_event_dict) == 0:
-        # work on it
-        # find a signal with only one outstanding 
-        pass
+    for signal_1 in sgnls_dict.keys():
+        if len(sgnls_dict[signal_1].keys()) == 1:
+            sgnl_event_dict.setdefault(signal_1, list(sgnls_dict[signal_1].keys())[0])
+            continue
+        for signal_2 in sgnls_dict.keys():
+            if signal_2 == signal_1 or abs(len(sgnls_dict[signal_1]) - len(sgnls_dict[signal_2])) > 1:
+                continue
+            events_results = []
+            for event, event_count in sgnls_dict[signal_1].items():
+                if (event in sgnls_dict[signal_2].keys() and event_count > sgnls_dict[signal_2][event]) \
+                    or event not in sgnls_dict[signal_2].keys():
+                        events_results.append(event)
+            if len(events_results) == 1:
+                sgnl_event_dict[signal_1] = events_results[0] 
     return sgnl_event_dict
 
 
