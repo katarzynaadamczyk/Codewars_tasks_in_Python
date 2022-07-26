@@ -11,9 +11,6 @@ my solution to task: https://www.codewars.com/kata/62a3855fcaec090025ed2a9a
 #]
 
 
-from unittest import result
-
-
 def delete_events(events_dict, events_to_delete):
     for event in events_to_delete:
         del events_dict[event]
@@ -77,9 +74,9 @@ def decode_smoke_signals(days):
             del sgnls_dict[signal]  
             for new_signal in sgnls_dict.keys():
                 if event in sgnls_dict[new_signal].keys():
-                    sgnls_dict[new_signal][event] -= 1
-                    if sgnls_dict[new_signal][event] <= 0:
-                        del sgnls_dict[new_signal][event]
+                  #  sgnls_dict[new_signal][event] -= 1
+                  #  if sgnls_dict[new_signal][event] <= 0:
+                    del sgnls_dict[new_signal][event]
     return ret_dict
 
 def tests():
@@ -122,10 +119,27 @@ def tests():
         'Ceasefire called', '8.9.3': 'Ceasefire called', '5.2.3': 'Tanks spotted', \
         '2.6': 'Medical helicopters spotted', '5.6.6': 'Pizza delivery spotted', '9.9.2': 'Infantry spotted'}")
 
-
-
+def new_test():
+    days = [
+            (['8', '4.4.4', '2', '6', '1.7', '2.7.9'], ['Orange army retreats', 'Medical helicopters spotted', 'Ceasefire called', 'Ceasefire called', 'Orange army charges', 'Orange army charges']), 
+            (['9.9.6', '4.4.4', '6', '5.1.6', '2', '9'], ['Orange army charges', 'Infantry spotted', 'Orange army charges', 'Infantry spotted', 'Ceasefire called', 'Missile launchers spotted']), 
+            (['8', '6.1.5', '1.7', '6', '4.4.4'], ['Missile launchers spotted', 'Orange army retreats', 'Orange army charges', 'Medical helicopters spotted', 'Ceasefire called']), 
+            (['4.6.9', '4.4.4', '6', '9'], ['Orange army charges', 'Infantry spotted', 'Ceasefire called', 'Missile launchers spotted']), 
+            (['2', '9.9.6', '6.1.5', '9'], ['Infantry spotted', 'Missile launchers spotted', 'Infantry spotted', 'Orange army charges']), 
+            (['2', '4.6.9', '1.7', '4.4.4'], ['Missile launchers spotted', 'Orange army charges', 'Medical helicopters spotted', 'Ceasefire called'])
+           ]
+    result = {'6': 'Orange army charges', '1.7': 'Medical helicopters spotted', 
+              '4.6.9': 'Missile launchers spotted', '2.7.9': 'Ceasefire called', '9.9.6': 'Infantry spotted', 
+              '6.1.5': 'Missile launchers spotted', '4.4.4': 'Ceasefire called', '9': 'Infantry spotted', 
+              '5.1.6': 'Missile launchers spotted', '2': 'Orange army charges', '8': 'Orange army retreats'}
+    print('5th test')
+    print(decode_smoke_signals(days))
+    print('should equal')
+    print(result)
+    
+    
 if __name__ == '__main__':
-    tests()
+    # tests()
     # days = [(['9.9.2', '5.6.6', '2.6', '8.2'], ['Medical helicopters spotted', 'Pizza delivery spotted', 'Orange army charges', 'Infantry spotted']), 
     #        (['2.6', '8.9.3', '9', '9.9.2', '5.2.3', '8.2'], 
     #         ['Ceasefire called', 'Infantry spotted', 'Medical helicopters spotted', 'Tanks spotted', 'Ceasefire called', 'Orange army charges']), 
@@ -135,4 +149,5 @@ if __name__ == '__main__':
     #         ['Pizza delivery spotted', 'Medical helicopters spotted', 'Orange army charges', 'Tanks spotted'])]
     # print(find_common_signals(days))
     # print(decode_smoke_signals(days))
+    new_test()
     
