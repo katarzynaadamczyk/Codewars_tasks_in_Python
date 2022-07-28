@@ -18,12 +18,11 @@ operations = [COMMON, NONCOMMON_L, NONCOMMON_R]
 
 def common_signal(line_1, line_2):
     for operation in operations:
-        if len(operation(line_1[2], line_2[2])) == 1:
-            common_event = list(operation(line_1[2], line_2[2]))[0]
-            common_signals = list(operation(line_1[0], line_2[0]))
-            print(common_event, common_signals)
-            return common_event, common_signals
-    return '', []
+        common_event = list(operation(line_1[2], line_2[2]))
+        common_signals = list(operation(line_1[0], line_2[0]))
+        if len(common_event) == 1 and len(common_signals) == 1:
+            return common_event[0], common_signals[0]
+    return '', ''
             
 
 def decode_smoke_signals(days):
@@ -31,64 +30,41 @@ def decode_smoke_signals(days):
     for i in range(len(days)):
         days[i] = [set(days[i][0]), days[i][1], set(days[i][1])]
         if len(days[i][2]) == 1:
-            days_to_delete.append(i)
+            days_to_delete.add(i)
             for signal in days[i][0]:
                 signals_to_delete.add(signal)
                 days_to_delete.add(i)
-                ret_dict[signal] = list(days[i][0])[0]
-    i = 0
-    while True:
-        print(i)
-        print('days')
-        print(days)
-        
-        print('signals_to_delete')
-        print(signals_to_delete)
-        
-        print('ret_dict')
-        print(ret_dict)
+                ret_dict[signal] = list(days[i][2])[0]
+    while len(days):
         for signal in signals_to_delete:
             for i in range(len(days)):
                 if signal in days[i][0]:
-                    print('before', signal, ret_dict[signal])
-                    print(days[i])
                     days[i][0].discard(signal)
                     days[i][1].remove(ret_dict[signal])
                     days[i][2] = set(days[i][1])
-                    
-                    print('after', signal)
-                    print(days[i])
                     if len(days[i][0]) < 1:
                         days_to_delete.add(i)     
             
-        print('days_to_delete')
-        print(days_to_delete)
         for i in sorted(list(days_to_delete), reverse=True):
             del days[i]
         days_to_delete, signals_to_delete = set(), set()
         for i1 in range(len(days)):
-            for i2 in range(i1 + 1, len(days)):
+            for i2 in range(i1, len(days)):
                 common_event, common_signals = common_signal(days[i1], days[i2])
                 if len(common_signals) > 0:
-                    for signal in common_signals:
-                        ret_dict[signal] = common_event
-                        signals_to_delete.add(signal)
-                    break
-        i += 1
-        if i > 5:               
-            break
-    print(days)
+                    ret_dict[common_signals] = common_event
+                    signals_to_delete.add(common_signals)
+        print(days)
+        print(ret_dict)
     return ret_dict
             
     
 
 def tests():
-    '''
     print('first test:')
     print(decode_smoke_signals([(["2"],["Convoy attacked"])]))
     print('should equal: {"2": "Convoy attacked"}')
     print()
-    '''
     print('second test:')
     print(decode_smoke_signals([(["4","5.1"],["Ambush in the jungle","Orange army retreats"]),
             (["4","5.1","3.2.1"],["Tanks deployed","Orange army retreats","Ambush in the jungle"]),
@@ -145,7 +121,7 @@ def new_test():
     
     
 if __name__ == '__main__':
-    # tests()
+    tests()
     # days = [(['9.9.2', '5.6.6', '2.6', '8.2'], ['Medical helicopters spotted', 'Pizza delivery spotted', 'Orange army charges', 'Infantry spotted']), 
     #        (['2.6', '8.9.3', '9', '9.9.2', '5.2.3', '8.2'], 
     #         ['Ceasefire called', 'Infantry spotted', 'Medical helicopters spotted', 'Tanks spotted', 'Ceasefire called', 'Orange army charges']), 
