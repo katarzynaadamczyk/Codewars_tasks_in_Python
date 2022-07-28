@@ -10,38 +10,73 @@ my solution to task: https://www.codewars.com/kata/62a3855fcaec090025ed2a9a
 #   (["5.1"],["Orange army retreats"])
 #]
 
+COMMON = lambda x, y: x & y
+NONCOMMON_L = lambda x, y: x - y
+NONCOMMON_R = lambda x, y: y - x
+
+operations = [COMMON, NONCOMMON_L, NONCOMMON_R]
+
+def common_signal(line_1, line_2):
+    for operation in operations:
+        if len(operation(line_1[2], line_2[2])) == 1:
+            common_event = list(operation(line_1[2], line_2[2]))[0]
+            common_signals = list(operation(line_1[0], line_2[0]))
+            print(common_event, common_signals)
+            return common_event, common_signals
+    return '', []
+            
+
 def decode_smoke_signals(days):
-    ret_dict, days_to_delete, signals_to_delete = {}, [], []
+    ret_dict, days_to_delete, signals_to_delete = {}, set(), set()
     for i in range(len(days)):
         days[i] = [set(days[i][0]), days[i][1], set(days[i][1])]
         if len(days[i][2]) == 1:
             days_to_delete.append(i)
             for signal in days[i][0]:
-                signals_to_delete.append(signal)
-                days_to_delete.append(i)
+                signals_to_delete.add(signal)
+                days_to_delete.add(i)
                 ret_dict[signal] = list(days[i][0])[0]
+    i = 0
     while True:
-        for i in sorted(days_to_delete, reverse=True):
-            del days[i]
+        print(i)
+        print('days')
+        print(days)
+        
+        print('signals_to_delete')
+        print(signals_to_delete)
+        
+        print('ret_dict')
+        print(ret_dict)
         for signal in signals_to_delete:
             for i in range(len(days)):
                 if signal in days[i][0]:
-                    days[i][0].discord(signal)
+                    print('before', signal, ret_dict[signal])
+                    print(days[i])
+                    days[i][0].discard(signal)
                     days[i][1].remove(ret_dict[signal])
                     days[i][2] = set(days[i][1])
-                    # todo
-        days_to_delete, signals_to_delete = [], []
+                    
+                    print('after', signal)
+                    print(days[i])
+                    if len(days[i][0]) < 1:
+                        days_to_delete.add(i)     
+            
+        print('days_to_delete')
+        print(days_to_delete)
+        for i in sorted(list(days_to_delete), reverse=True):
+            del days[i]
+        days_to_delete, signals_to_delete = set(), set()
         for i1 in range(len(days)):
-            for i2 in range(len(days)):
-                if i1 == i2:
-                    continue
-                if len(days[i1][2] & days[i2][2]) == 1:
-                    common_event = list(days[i1][2] & days[i2][2])[0]
-                    common_signals = list(days[i1][0] & days[i2][0])
+            for i2 in range(i1 + 1, len(days)):
+                common_event, common_signals = common_signal(days[i1], days[i2])
+                if len(common_signals) > 0:
                     for signal in common_signals:
                         ret_dict[signal] = common_event
-                        # todo
-        break
+                        signals_to_delete.add(signal)
+                    break
+        i += 1
+        if i > 5:               
+            break
     print(days)
     return ret_dict
             
