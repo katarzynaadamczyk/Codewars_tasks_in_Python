@@ -30,7 +30,7 @@ Some interesting tasks I found and solved them using Python 3. This project is u
 My solutions to projects described in 'Automate the boring stuff with Python' by Albert Sweigart. Each individual .py file solves problem given at the end of its title's chapter (e.g. chapter_3.py solves problem described at the end of chapter 3, etc.). 
 
 ## Battleship_field_validator
-My solution to task found on https://www.codewars.com/kata/52bb6539a4cf1b12d90005b7. I actually work on it.
+My solution to task found on https://www.codewars.com/kata/52bb6539a4cf1b12d90005b7. 
 
 ## Caesar_2:
 Second variation on Ceasar cipher, task from codewars.com (https://www.codewars.com/kata/55084d3898b323f0aa000546).
