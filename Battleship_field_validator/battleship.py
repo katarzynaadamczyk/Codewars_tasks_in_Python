@@ -11,14 +11,12 @@ def check_result(result_dict):
     return True if len(result_dict) == len(should_be_dict) else False
 
 def check_on_x(x1, x2, y, battlefield):
-    print(f'check_on_x with params: x1: {x1}, x2:{x2}, y: {y}')
     for x in range(x1, x2 + 1):
         if battlefield[y][x] != 0:
             return False
     return True
 
 def check_on_y(y1, y2, x, battlefield):
-    print(f'check_on_y with params: y1: {y1}, y2:{y2}, x: {x}')
     for y in range(y1, y2 + 1):
         if battlefield[y][x] != 0:
             return False
@@ -29,21 +27,14 @@ def check_surroundings(x1, y1, x2, y2, battlefield):
     new_x2 = min(len(battlefield[0]) - 1, x2 + 1)
     new_y1 = max(0, y1 - 1)
     new_y2 = min(len(battlefield) - 1, y2 + 1)
-    
-    print(x1, x2)
-    print(new_x1, new_x2)
-    if y1 != new_y1:
-        if not check_on_x(new_x1, new_x2, new_y1, battlefield):
-            return False
-    if y2 != new_y2:
-        if not check_on_x(new_x1, new_x2, new_y2, battlefield):
-            return False
-    if x1 != new_x1:
-        if not check_on_y(new_y1, new_y2, new_x1, battlefield):
-            return False
-    if x2 != new_x2:
-        if not check_on_y(new_y1, new_y2, new_x2, battlefield):
-            return False
+    for y, new_y in [(y1, new_y1), (y2, new_y2)]:
+        if y != new_y:
+            if not check_on_x(new_x1, new_x2, new_y, battlefield):
+                return False
+    for x, new_x in [(x1, new_x1), (x2, new_x2)]:
+        if x != new_x:
+            if not check_on_y(new_y1, new_y2, new_x, battlefield):
+                return False
     return True
 
 def find_len(y, x, battlefield, checked_ones_positions):
@@ -61,8 +52,7 @@ def find_len(y, x, battlefield, checked_ones_positions):
         
 
 def validate_battlefield(field):
-    ships_count_dict = {}
-    checked_ones_positions = set()
+    ships_count_dict, checked_ones_positions = {}, set()
     for y in range(len(field)):
         for x in range(len(field[y])):
             if field[y][x] == 1:
@@ -80,7 +70,6 @@ def validate_battlefield(field):
                     return False
             elif field[y][x] != 0:
                 return False
-    print(ships_count_dict)
     return check_result(ships_count_dict)
 
 def test1():
