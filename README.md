@@ -78,6 +78,7 @@ Solution to problems regarding arrays.
 * median_of_two_sorted_arrays - my solution to problem found on: https://leetcode.com/problems/median-of-two-sorted-arrays/
 * Minimum_moves - my solution to problem found on: https://leetcode.com/problems/minimum-moves-to-equal-array-elements-ii
 * smoke_signals - my solution to problem found on: https://www.codewars.com/kata/62a3855fcaec090025ed2a9a
+* Spiralize - my solution to problem found on: https://www.codewars.com/kata/534e01fbbb17187c7e0000c6/
 * TheMillionthFibonacci - my solution to problem found on: https://www.codewars.com/kata/53d40c1e2f13e331fc000c26
 * two_sum - my solution to problem found on: https://leetcode.com/problems/two-sum/
 
