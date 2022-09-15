@@ -52,7 +52,7 @@ def solve():
                     print(new_sol)
                     for hint_key in easy_hints[i].keys():
                         new_sol[key][hint_key] = easy_hints[i][hint_key]
-                    solve_r(new_sol, easy_num + 1)
+                    solve_r(deepcopy(new_sol), easy_num + 1)
                     print(new_sol)
                     sol = new_sol
                     
