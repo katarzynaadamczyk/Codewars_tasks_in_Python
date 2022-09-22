@@ -6,15 +6,17 @@ cards = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
 
 
 
+def score(hand):
+    return 0
+
 def best_hands(hands):
     if len(hands) < 1:
         raise ValueError('wrong number of hands')
     if len(hands) == 1:
-        return hands[0]
+        return [hands[0]]
+    scores = [score(hand) for hand in hands]
+    return [hands[scores.index(max(scores))]]zqq
     
-    pass
-
-
 '''
 YACHT = lambda dice: 50 if len(set(dice)) == 1 else 0
 ONES = lambda dice: sum([x for x in dice if x == 1])
