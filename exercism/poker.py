@@ -49,8 +49,6 @@ def best_hands(hands):
         scores.append(hand_score)
         sorted_hands.append(lst_of_cards)
     max_score = max(scores)
-    print(scores)
-    print(sorted_hands)
     max_values = [index for index, value in enumerate(scores) if value == max_score]
     max_cards = max([sorted_hands[index] for index in max_values])
     return [hands[index] for index, value in enumerate(sorted_hands) if value == max_cards]
