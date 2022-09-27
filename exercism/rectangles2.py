@@ -6,35 +6,31 @@
 from itertools import combinations
 import re
 
-def check_if_down_corresponds(upper_point, down_line, strings):
-    for down_point in down_line:
-        if down_point[1] == upper_point[1]:
-            y_min = min(upper_point[0], down_point[0]) + 1
-            y_max = max(upper_point[0], down_point[0])
-            if len(re.findall(r'[^|+]', ''.join([strings[y][down_point[1]] for y in range(y_min, y_max)]))) == 0:
-                return True
-            break
-    return False
-
 
 def check_x_line(point1, point2, strings):
-    x_min = min(point1[1], point2[1]) + 1
-    x_max = max(point1[1], point2[1])
-    if len(re.findall(r'[^-+]', strings[point1[0]][x_min:x_max])) == 0:
+    if len(re.findall(r'[^-+]', strings[point1[0]][point1[1]+1:point2[1]])) == 0:
         return True
     return False
 
+def check_y_line(point1, point2, strings):
+    if len(re.findall(r'[^|+]', ''.join([strings[y][point1[1]] for y in range(point1[0] + 1, point2[0])]))) == 0:
+        return True
+    return False
+
+
 def count_rectangles(upper_line, down_line, strings):
     count_rect = 0
-    for upper_index, upper_point in enumerate(upper_line):
-        if check_if_down_corresponds(upper_point, down_line, strings):
-            for second_upper_point in upper_line[upper_index+1::]:
-                if check_x_line(upper_point, second_upper_point, strings):
-                    if check_if_down_corresponds(second_upper_point, down_line, strings) and \
-                       check_x_line((down_line[0][0], upper_point[1]), (down_line[0][0], second_upper_point[1]), strings):
-                        count_rect += 1
-                else:
-                    break
+    for upper_points in combinations(upper_line, 2):
+        upper_min = min(upper_points)
+        upper_max = max(upper_points)
+        if check_x_line(upper_min, upper_max, strings):
+            for down_points in combinations(down_line, 2):
+                down_min = min(down_points)
+                down_max = max(down_points)
+                if check_x_line(down_min, down_max, strings) and \
+                   upper_min[1] == down_min[1] and upper_max[1] == down_max[1] and \
+                   check_y_line(upper_min, down_min, strings) and check_y_line(upper_max, down_max, strings):
+                       count_rect += 1
     return count_rect
 
 
@@ -61,6 +57,7 @@ def main():
             "+---+-------+"
            ]
     print('Rectangles for test is', rectangles(test), 'while it should equal 3')
+    
     
 
 if __name__ == "__main__":
