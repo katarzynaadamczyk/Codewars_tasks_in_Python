@@ -12,6 +12,7 @@ def check_x_line(point1, point2, strings):
         return True
     return False
 
+
 def check_y_line(point1, point2, strings):
     if len(re.findall(r'[^|+]', ''.join([strings[y][point1[1]] for y in range(point1[0] + 1, point2[0])]))) == 0:
         return True
