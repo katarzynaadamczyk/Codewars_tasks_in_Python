@@ -24,8 +24,6 @@ def find_fewest_coins(coins, target):
             else:
                 new_line.append(calc_table[y][i])
         calc_table.append(new_line)
-   # for line in calc_table:
-   #     print(line)
     if sum(calc_table[len(coins)][target][1]) < target:
         raise ValueError("can't make target with given coins")
     return sorted(calc_table[len(coins)][target][1])
