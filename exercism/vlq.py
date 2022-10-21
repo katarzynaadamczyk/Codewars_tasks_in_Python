@@ -1,5 +1,8 @@
 ''' exercise VLQ '''
 
+from multiprocessing.sharedctypes import Value
+
+
 def encode(numbers):
     ret_table = []
     numbers = [x[2:] for x in list(map(bin, numbers))]
@@ -12,12 +15,19 @@ def encode(numbers):
 
 
 def decode(bytes_):
-    ret_value = []
+    ret_table, act_number = [], ''
     bytes_ = [x[2:].zfill(8) for x in list(map(bin, bytes_))]
+    if bytes_[-1].startswith('1'):
+        raise ValueError("incomplete sequence")
     print(bytes_)
     for byte_ in bytes_:
-        pass
-    return 0 # int(ret_value, 2)
+        act_number += byte_[1:]
+        if byte_.startswith('0'):
+            if len(act_number) > 28 and '1' in act_number[0:-28]:
+                act_number = 32 * '1'
+            ret_table.append(act_number)
+            act_number = ''
+    return [int(x, 2) for x in ret_table]
 
 
 def main():
