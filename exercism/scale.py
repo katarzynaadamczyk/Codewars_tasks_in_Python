@@ -19,9 +19,7 @@ class Scale:
     def interval(self, intervals):
         lst_to_ret, index = [self.tonic], 0
         for char in intervals:
-            index += Scale.intervals[char]
-            if index >= len(self.chromatic_scale):
-                index -= len(self.chromatic_scale)
+            index = (index + Scale.intervals[char]) % len(self.chromatic_scale)
             lst_to_ret.append(self.chromatic_scale[index])
         return lst_to_ret
 
