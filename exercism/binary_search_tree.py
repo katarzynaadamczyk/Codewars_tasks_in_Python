@@ -32,3 +32,10 @@ class BinarySearchTree:
 
     def sorted_data(self):
         pass
+
+def main():
+    pass
+
+if __name__ == '__main__':
+    main()
+    
