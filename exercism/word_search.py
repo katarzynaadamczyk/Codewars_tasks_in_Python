@@ -5,6 +5,10 @@ class Point:
     def __init__(self, x, y):
         self.x = x
         self.y = y
+        
+    def reverse(self):
+        self.x, self.y = self.y, self.x
+        return self
 
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y
@@ -26,10 +30,10 @@ class WordSearch:
     VERTICAL = 1
     DIAGONAL_LEFT_TO_RIGHT = 2
     DIAGONAL_RIGHT_TO_LEFT = 3
-    point_changes = {HORIZONTAL: lambda x, y, x_: Point(x + x_, y),
-                     VERTICAL: lambda x, y, x_: Point(y + x_, x), 
-                     DIAGONAL_LEFT_TO_RIGHT: lambda x, y, x_: Point(x + x_, y + x_), 
-                     DIAGONAL_RIGHT_TO_LEFT: lambda x, y: Point()} # TODO
+    point_changes = {HORIZONTAL: lambda point1, point2: point1 + point2,
+                     VERTICAL: lambda point1, point2: (point1 + point2).reverse(),
+                     DIAGONAL_LEFT_TO_RIGHT: lambda point1, point2: point1 + point2, # TODO
+                     DIAGONAL_RIGHT_TO_LEFT: lambda point1, point2: point1 + point2} # TODO
     
     def __init__(self, puzzle):
         if not self.check(puzzle):
@@ -39,26 +43,26 @@ class WordSearch:
     def search(self, word):
         word_reversed = word[::-1]
         for type_ in WordSearch.point_changes.keys():
-            for y, x, line in self.generate_lines(type_):
+            for point, line in self.generate_lines(type_):
                 x_ = line.find(word)
                 if x_ >= 0:
-                    return (WordSearch.point_changes[type_](x, y, x_), WordSearch.point_changes[type_](x + len(word) - 1, y, x_))
+                    return (WordSearch.point_changes[type_](point, Point(x_, 0)), WordSearch.point_changes[type_](point, Point(len(word) - 1 + x_, 0)))
                 x_ = line.find(word_reversed)
                 if x_ >= 0:
-                    return (WordSearch.point_changes[type_](x + len(word) - 1, y, x_), WordSearch.point_changes[type_](x, y, x_))
+                    return (WordSearch.point_changes[type_](point, Point(len(word) - 1 + x_, 0)), WordSearch.point_changes[type_](point, Point(x_, 0)))
         return None
 
     def generate_lines(self, type_):
         if type_ == WordSearch.HORIZONTAL:
             for y, line in enumerate(self.puzzle):
-                yield y, 0, line
+                yield Point(0, y), line
         if type_ == WordSearch.VERTICAL:
             for x in range(len(self.puzzle[0])):
-                yield x, 0, ''.join([self.puzzle[y][x] for y in range(len(self.puzzle))])
+                yield Point(0, x), ''.join([self.puzzle[y][x] for y in range(len(self.puzzle))])
         if type_ == WordSearch.DIAGONAL_LEFT_TO_RIGHT:
             x, y = len(self.puzzle[0]) - 1, 0
             while y < len(self.puzzle):
-                yield y, x, ''.join([self.puzzle[y_][x_] for x_, y_ in zip(range(x, len(self.puzzle[0])), range(y, len(self.puzzle)))])
+                yield Point(x, y), ''.join([self.puzzle[y_][x_] for x_, y_ in zip(range(x, len(self.puzzle[0])), range(y, len(self.puzzle)))])
                 x -= 1
                 if x < 0:
                     x = 0
@@ -66,7 +70,7 @@ class WordSearch:
                     
         if type_ == WordSearch.DIAGONAL_RIGHT_TO_LEFT:
             # TODO
-            yield 0, 0, 'abc'    
+            yield Point(0, 0), 'abc'    
     
     def check(self, puzzle):
         if len(puzzle) == 0:
