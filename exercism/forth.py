@@ -24,6 +24,10 @@ def raise_undefinedoperationerror():
     raise ValueError("undefined operation")
 
 
+def raise_illegaloperation():
+    raise ValueError("illegal operation")
+
+
 def add(stack):
     check_stackunderflow(stack)
     return stack[:-2] + [stack[-1] + stack[-2]]
@@ -67,14 +71,36 @@ def over(stack):
 
 
 def create_command_table():
-    table = {'+': add, '-': substract, '*': multiply, '/': divide,
-             'dup': dup, 'drop': drop, 'swap': swap, 'over': over}
+    table = {'+': [add], '-': [substract], '*': [multiply], '/': [divide],
+             'dup': [dup], 'drop': [drop], 'swap': [swap], 'over': [over]}
     return table
 
 
 def add_new_command(line, table):
-    # TODO
+    line = line.strip(':; ').split()
+    if len(line) < 2 or re.match(r'-?\d+', line[0]):
+        raise_illegaloperation()
+    previous_operations = table.get(line[0], [])
+    table[line[0]] = []
+    for operation in line[1:]:
+        if re.match(r'-?\d+', operation):
+            table[line[0]] = table[line[0]] + [int(operation)]
+        elif operation not in table.keys():
+            raise_illegaloperation()
+        elif operation == line[0]:
+            table[line[0]] = table[line[0]] + previous_operations
+        else:
+            table[line[0]] = table[line[0]] + table[operation]
     return table
+
+
+def process_command(stack, commands):
+    for command in commands:
+        if type(command) == type(1):
+            stack = stack + [command]
+        else:
+            stack = command(stack)
+    return stack
 
 def evaluate(input_data):
     command_table = create_command_table()
@@ -88,7 +114,7 @@ def evaluate(input_data):
                 if re.match(r'-?\d+', command):
                     stack.append(int(command))
                 elif command in command_table.keys():
-                    stack = command_table[command](stack)
+                    stack = process_command(stack, command_table[command])
                 else:
                     raise_undefinedoperationerror()
     return stack
