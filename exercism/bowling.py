@@ -1,62 +1,49 @@
 ''' exercise bowling game '''
 
 class BowlingGame:
+    BONUS = 11
+    ENDING = BONUS + 1
+    
     def __init__(self):
-        self.__score__ = 0
-        self.__frame__ = 1
-        self.__pins_left__ = 10
-        self.__throw_no__ = 1
-        self.__no_of_throws_for_multiplier__ = [0]
-        self.__no_of_throws_left__ = 20
+        self.frames_dict = {x: [] for x in range(1, BowlingGame.ENDING + 1)}
+        self.actual_frame = 1
+        self.bonus = 0
+        self.throws_max = 2
+        self.pins_left = 10
+        
 
     def roll(self, pins):
-        if pins < 0 or pins > self.__pins_left__:
+        if pins < 0 or pins > self.pins_left:
             raise ValueError("invalid fill balls")
-      #  if self.__frame__ > 10:
-      #      raise IndexError("cannot throw bonus with an open tenth frame")
-        self.__score__ += len(self.__no_of_throws_for_multiplier__) * pins
-        self.__pins_left__ -= pins
-        if pins == 10 and self.__throw_no__ == 1:
-            self.__frame__ += 1
-            self.__pins_left__ = 10
-            if self.__frame__ < 10:
-                self.__no_of_throws_left__ -= 2
-                self.__no_of_throws_for_multiplier__.append(3)
-            elif self.__frame__ >= 10:
-                self.__no_of_throws_left__ -= 1
-            elif self.__frame__ == 10:
-                print(self.__frame__)
-                print(self.__no_of_throws_left__)
-        elif self.__pins_left__ == 0:
-            self.__frame__ += 1
-            self.__throw_no__ = 1
-            self.__pins_left__ = 10
-            if self.__frame__ < 10:
-                self.__no_of_throws_for_multiplier__.append(2)
-                self.__no_of_throws_left__ -= 1
-            elif self.__frame__ > 10:
-                self.__no_of_throws_left__ -= 1
-        elif self.__throw_no__ == 2:
-            self.__frame__ += 1
-            self.__throw_no__ = 1
-            self.__pins_left__ = 10
-            self.__no_of_throws_left__ -= 1
+        if self.actual_frame < BowlingGame.BONUS:
+            self.frames_dict[self.actual_frame].append(pins)
+            if sum(self.frames_dict[self.actual_frame]) == 10:
+                self.actual_frame +=1
+                self.pins_left = 10
+            elif len(self.frames_dict[self.actual_frame]) == 2:
+                self.actual_frame +=1
+                self.pins_left = 10
+            else:
+                self.pins_left -= pins
+                self.bonus = self.bonus - 1 if self.bonus > 0 else 0
+        elif self.actual_frame == BowlingGame.BONUS and self.bonus > 0:
+            self.frames_dict[self.actual_frame].append(pins)
+            self.bonus -= 1
+            if self.bonus <= 0:
+                self.actual_frame += 1
         else:
-            self.__no_of_throws_left__ -= 1
-            self.__throw_no__ += 1
-        self.actualize_multipliers()
+            raise IndexError("cannot throw bonus with an open tenth frame") 
 
     def score(self):
-        #if self.__no_of_throws_left__ > 0:
-        #    raise IndexError("cannot throw bonus with an open tenth frame") 
-        print(self.__no_of_throws_left__)
-        return self.__score__
+        if self.actual_frame < BowlingGame.ENDING:
+            raise IndexError("cannot throw bonus with an open tenth frame") 
+        return self.count_score()
     
-    def actualize_multipliers(self):
-        for index in range(len(self.__no_of_throws_for_multiplier__) - 1, 0, -1):
-            self.__no_of_throws_for_multiplier__[index] -= 1
-            if self.__no_of_throws_for_multiplier__[index] == 0:
-                del self.__no_of_throws_for_multiplier__[index]
+    def count_score(self):
+        for key, val in self.frames_dict.items():
+            print(key, ':', val)
+        return sum([sum(x) for x in self.frames_dict.values()])
+    
                 
 def main():
     rolls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 0, 1]
