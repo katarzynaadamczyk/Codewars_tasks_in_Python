@@ -61,7 +61,14 @@ class Board:
                         , i.e. "W", "B", "".  The value being a set
                         of coordinates owned by the owner.
         """
-        pass
+        territories_dict, coordinates_set = {WHITE: set(), BLACK: set(), NONE: set()}, set()
+        for y in range(len(self.board)):
+            for x, value in enumerate(self.board[y]):
+                if value == ' ' and (x, y) not in coordinates_set:
+                    stone, coordinates = self.territory(x=x, y=y)
+                    territories_dict[stone] = territories_dict[stone].union(coordinates)
+                    coordinates_set = coordinates_set.union(coordinates)
+        return territories_dict
     
     def where_to_go(self, coordinate):
         yield (-1 + coordinate[0], coordinate[1])

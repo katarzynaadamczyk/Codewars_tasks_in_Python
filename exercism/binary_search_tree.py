@@ -31,7 +31,13 @@ class BinarySearchTree:
         return self.root
 
     def sorted_data(self):
-        pass
+        return self.get_sorted_data(self.root)
+    
+    def get_sorted_data(self, leaf):
+        left = [] if leaf.left is None else self.get_sorted_data(leaf.left)
+        right = [] if leaf.right is None else self.get_sorted_data(leaf.right)
+        return left + [leaf.data] + right
+    
 
 def main():
     pass
