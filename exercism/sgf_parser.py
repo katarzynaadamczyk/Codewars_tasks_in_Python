@@ -32,21 +32,52 @@ class SgfTree:
         return 'Properties: ' + str(self.properties) + ', Kids: ' + str(self.children)
 
 
-def parse_properties(input_string):
+def parse_properties_old(input_string):
     properties = {}
-    string_properties = re.findall(r'(\w+)((\[\w*\])*)', input_string)
+    string_properties = re.findall(r'(\w+)((\[.*\])*)', input_string, flags=re.DOTALL)
     for property in string_properties:
         if input_string.startswith(property[0]):
             if property[0].isupper():
                 if len(property[1]) == 0:
                     raise ValueError("properties without delimiter")
                 values = property[1].strip('[]').split('][')
-                values.remove('') # ERROR
+                while '' in values:
+                    values.remove('')
                 properties.setdefault(property[0], values)
                 input_string = input_string[len(property[0]) + len(property[1]):]
             else:
                 raise ValueError("property must be in uppercase")
     return properties, input_string
+
+
+def parse_properties(input_string):
+    properties = {}
+    while not (input_string.startswith(';') or input_string.startswith('(;')) and len(input_string) > 0:
+        if '[' in input_string and ']' in input_string:
+            key, input_string = input_string[:input_string.find('[')], input_string[input_string.find('['):]
+            print(key, input_string)
+        else:
+            print(input_string)
+            raise ValueError("properties without delimiter")
+        if key.isupper() and key.isalpha():
+            values = []
+            while input_string.startswith('['):
+                last_index = input_string.find(']')
+                if '\\]' in input_string:
+                    while last_index == input_string.find('\\]') + 2 and 0 < last_index < len(input_string):
+                        last_index = input_string.find(']', last_index + 1)
+                if 0 < last_index < len(input_string):
+                    if last_index > 1:
+                        values.append(input_string[1:last_index])
+                    input_string = input_string[last_index + 1:]
+                else:
+                    print(last_index)
+                    raise ValueError("properties without delimiter")
+            properties.setdefault(key, values)
+        else:
+            raise ValueError("property must be in uppercase")
+    return properties, input_string
+        
 
 def parse_children(input_string):
     children = []
@@ -75,7 +106,7 @@ def parse(input_string):
     return SgfTree(properties, children)
 
 def main():
-    sgf = 'A[]'
+    sgf = "A[\\]b\nc\nd\t\te \n\\]]"
     print(parse_properties(sgf))
 
 if __name__ == '__main__':
