@@ -50,29 +50,38 @@ def parse_properties_old(input_string):
     return properties, input_string
 
 
+'''
+
+    Newlines are removed if they come immediately after a \, otherwise they remain as newlines.
+    All whitespace characters other than newline are converted to spaces.
+    \ is the escape character. Any non-whitespace character after \ is inserted as-is. Any whitespace character after \ follows the above rules. Note that SGF does not have escape sequences for whitespace characters such as \t or \n.
+
+'''
+
+def remove_whitespaces(input_string):
+    input_string = input_string.replace('\\n', '').replace('\t', ' ')
+    return input_string
+
 def parse_properties(input_string):
     properties = {}
     while not (input_string.startswith(';') or input_string.startswith('(;')) and len(input_string) > 0:
-        if '[' in input_string and ']' in input_string:
-            key, input_string = input_string[:input_string.find('[')], input_string[input_string.find('['):]
-            print(key, input_string)
-        else:
-            print(input_string)
-            raise ValueError("properties without delimiter")
-        if key.isupper() and key.isalpha():
-            values = []
-            while input_string.startswith('['):
-                last_index = input_string.find(']')
-                if '\\]' in input_string:
-                    while last_index == input_string.find('\\]') + 2 and 0 < last_index < len(input_string):
-                        last_index = input_string.find(']', last_index + 1)
-                if 0 < last_index < len(input_string):
-                    if last_index > 1:
-                        values.append(input_string[1:last_index])
-                    input_string = input_string[last_index + 1:]
-                else:
-                    print(last_index)
-                    raise ValueError("properties without delimiter")
+        key = ''
+        while len(input_string) and input_string[0] not in '[]();':
+            key += input_string[0]
+            input_string = input_string[1:] 
+        if key.isalpha() and key.isupper():
+            if len(input_string) == 0 or input_string[0] != '[':
+                raise ValueError("properties without delimiter")
+            values, first_index, last_index = [], 1, 1
+            while last_index < len(input_string):
+                if input_string[last_index] == ']' and input_string[last_index-1:last_index+1] != '\\]':
+                    property_ = remove_whitespaces(input_string[first_index:last_index])
+                    values.append(property_)
+                    input_string = input_string[last_index+1:]
+                    last_index = 0
+                    if len(input_string) == 0 or input_string[0] != '[':
+                        break
+                last_index += 1
             properties.setdefault(key, values)
         else:
             raise ValueError("property must be in uppercase")
