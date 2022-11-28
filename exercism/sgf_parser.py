@@ -59,7 +59,7 @@ def parse_properties_old(input_string):
 '''
 
 def remove_whitespaces(input_string):
-    input_string = input_string.replace('\\n', '').replace('\t', ' ')
+    input_string = input_string.replace('\\n', '').replace('\t', ' ').replace('\\]', ']').replace('\\[', '[')
     return input_string
 
 def parse_properties(input_string):
@@ -89,12 +89,28 @@ def parse_properties(input_string):
         
 
 def parse_children(input_string):
+    print(input_string)
     children = []
-    # TODO
+    no_brackets, no_square_brackets, first_index, index = 0, 0, 0, 0
+    while index < len(input_string):
+        if (input_string[index] == ';' or input_string[index:index+2] == '(;') and no_square_brackets == 0:
+            no_brackets += 1
+            index += 1
+        elif input_string[index] in ');' and no_square_brackets == 0:
+            no_brackets -= 1
+        elif input_string[index] == '[' and input_string[index-1:index+1] != '\\[':
+            no_square_brackets += 1
+        elif input_string[index] == ']' and input_string[index-1:index+1] != '\\]':
+            no_square_brackets -= 1
+        index += 1
+        if no_brackets == 0 or index == len(input_string):
+            children.append(input_string[first_index:index])
+            first_index = index
     return children
 
 
 def parse(input_string):
+    print(input_string)
     if len(input_string) < 3:
         if input_string == '()':
             raise ValueError('tree with no nodes')
@@ -110,13 +126,15 @@ def parse(input_string):
     properties, input_string = parse_properties(input_string)
     children_strings = parse_children(input_string)
     children = []
+    print(children)
     for child in children_strings:
         children.append(parse(child))
+    
     return SgfTree(properties, children)
 
 def main():
-    sgf = "A[\\]b\nc\nd\t\te \n\\]]"
-    print(parse_properties(sgf))
+    sgf = "(;A[B];B[C])"
+    print(parse(sgf))
 
 if __name__ == '__main__':
     main()
