@@ -98,7 +98,7 @@ def parse_children(input_string):
             last_semicolon = not last_semicolon 
         elif input_string[index:index+2] == '(;' and no_square_brackets == 0:
             no_brackets += 1 if not last_semicolon else -1
-            last_semicolon = not last_semicolon
+            last_semicolon = False
             index += 1
         elif input_string[index] == ')' and no_square_brackets == 0:
             no_brackets -= 1
