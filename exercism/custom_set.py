@@ -86,16 +86,29 @@ class CustomSet:
         return other.set_tree.sorted_data() == self.set_tree.sorted_data()
 
     def add(self, element):
-        pass
+        self.set_tree = BinarySearchTree([element] + self.set_tree.sorted_data())
 
     def intersection(self, other):
-        pass
+        other_elements, inter = other.set_tree.sorted_data(), []
+        for elem in other_elements:
+            if elem in self.set_tree:
+                inter.append(elem)
+        return CustomSet(inter)
 
     def __sub__(self, other):
-        pass
+        my_elements, sub = self.set_tree.sorted_data(), []
+        for elem in my_elements:
+            if elem not in other.set_tree:
+                sub.append(elem)
+        return CustomSet(sub)
 
     def __add__(self, other):
-        pass
+        inter, other_elements, to_add = self.intersection(other), other.set_tree.sorted_data(), []
+        for elem in other_elements:
+            if elem not in inter:
+                to_add.append(elem)
+        return CustomSet(to_add + self.set_tree.sorted_data())
+        
     
     def __repr__(self) -> str:
         return str(self.set_tree.sorted_data())
