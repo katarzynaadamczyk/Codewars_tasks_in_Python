@@ -6,17 +6,12 @@ def square_root(number):
     if number == 0:
         return 0
     min_val, max_val, act_val = 1, number, 1
-    i = 0
     while not (act_val ** 2 == number or (act_val ** 2 < number and (act_val + 1) ** 2 > number)):
         if act_val ** 2 < number:
             min_val = act_val
         else:
             max_val = act_val
         act_val = (min_val + max_val) // 2
-        i += 1
-        if i > 15:
-            break
-    print(i)
     return act_val
 
 def main():
