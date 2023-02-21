@@ -19,6 +19,7 @@ class Zipper:
 
     def set_value(self, number):
         self.__value__ = number
+        return self
 
     def left(self):
         return self.__left__
@@ -28,6 +29,7 @@ class Zipper:
             self.__left__ = Zipper(data, self)
         else:
             self.__left__ = None
+        return self
 
     def right(self):
         return self.__right__
@@ -37,6 +39,7 @@ class Zipper:
             self.__right__ = Zipper(data, self)
         else:
             self.__right__ = None
+        return self
 
     def up(self):
         return self.parent
