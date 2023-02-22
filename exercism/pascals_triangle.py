@@ -1,5 +1,6 @@
 ''' exercise pascals'''
 
+# loop version
 def rows(row_count):
     if row_count < 0:
         raise ValueError('number of rows is negative')
@@ -9,6 +10,20 @@ def rows(row_count):
     for _ in range(2, row_count + 1):
         result.append([result[-1][0]] + [a + b for a, b in zip(result[-1][:-1], result[-1][1:])] + [result[-1][-1]])
     return result
+
+# recursion version
+def rowsr(row_count):
+    if row_count < 0:
+        raise ValueError('number of rows is negative')
+    if row_count == 0:
+        return []
+    if row_count == 1:
+       return [[1]]
+    result = rowsr(row_count - 1)
+    result.append([result[-1][0]] + [a + b for a, b in zip(result[-1][:-1], result[-1][1:])] + [result[-1][-1]])
+    return result
+
+
 
 def main():
     TRIANGLE = [
@@ -22,10 +37,15 @@ def main():
     [1, 7, 21, 35, 35, 21, 7, 1],
     [1, 8, 28, 56, 70, 56, 28, 8, 1],
     [1, 9, 36, 84, 126, 126, 84, 36, 9, 1],
-]
+]   
+    print('loop version tests')
     print(rows(0), 'should equal', TRIANGLE[:0])
     print(rows(1), 'should equal', TRIANGLE[:1])
     print(rows(5), 'should equal', TRIANGLE[:5])
+    print('recursion version tests')
+    print(rowsr(0), 'should equal', TRIANGLE[:0])
+    print(rowsr(1), 'should equal', TRIANGLE[:1])
+    print(rowsr(5), 'should equal', TRIANGLE[:5])
     
 if __name__ == '__main__':
     main()
