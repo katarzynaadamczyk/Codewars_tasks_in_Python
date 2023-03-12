@@ -84,6 +84,7 @@ Solutions to problems with strings.
 * burrows_wheeler_transformation - Solution to following problem found on Codewars: https://www.codewars.com/kata/54ce4c6804fcc440a1000ecb
 * find_first_unique_letter - find the most efficient way to find the first unique letter in given string
 * moves_in_squared_strings - my solution to following problem found on Codewars: https://www.codewars.com/kata/56dbe7f113c2f63570000b86
+* nico - my solution to problem found on Codewars: https://www.codewars.com/kata/5968bb83c307f0bb86000015
 * Play_with_two_strings - Solution to following problem found on Codewars: https://www.codewars.com/kata/56c30ad8585d9ab99b000c54
 * Rainfall - Solution to following problem found on Codewars: https://www.codewars.com/kata/56a32dd6e4f4748cc3000006
 * rle - Solution to following problem found on Codewars: https://www.codewars.com/kata/546dba39fa8da224e8000467
