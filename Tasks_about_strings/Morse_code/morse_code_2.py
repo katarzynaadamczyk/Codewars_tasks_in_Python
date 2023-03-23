@@ -13,17 +13,38 @@ MORSE_CODE = {'.-': 'A', '-...': 'B', '-.-.': 'C', '-..': 'D', '.': 'E', '..-.':
               '---...': ':', '-.-.-.': ';', '-...-': '=', '.-.-.': '+', '-....-': '-', 
               '..--.-': '_', '.-..-.': '"', '...-..-': '$', '.--.-.': '@', '...---...': 'SOS'}
 
+def get_one(one, step):
+    if one == step:
+        return '.'
+    elif one == 3 * step:
+        return '-'
+
 def decode_bits(bits):
     # ToDo: Accept 0's and 1's, return dots, dashes and spaces
-    print(MORSE_CODE)
-    return bits.replace('111', '-').replace('000', ' ').replace('1', '.').replace('0', '')
+    ones, zeros = re.findall(r'[1]{1,}', bits), re.findall(r'[0]{1,}', bits)
+    ones_len, zeros_len = [len(x) for x in ones], [len(x) for x in zeros]
+    if sum(ones_len + zeros_len) != len(bits):
+        raise ValueError('got not only ones and zeros')
+    step = min(ones_len + zeros_len)
+    result = ''
+    for one, zero in zip(ones_len, zeros_len):
+        result += get_one(one, step)
+        if zero == 3 * step:
+            result += ' '
+        elif zero == 7 * step:
+            result += '   '
+    result += get_one(ones_len[-1], step)
+    return result
 
 def decode_morse(morseCode):
     # ToDo: Accept dots, dashes and spaces, return human-readable message
-    return morseCode.replace('.', MORSE_CODE['.']).replace('-', MORSE_CODE['-']).replace(' ', '')
+    words, result = morseCode.split('   '), []
+    for word in words:
+        result.append(''.join([MORSE_CODE[char] for char in word.split()]))
+    return ' '.join(result)
 
 def main():
-    print(decode_bits('1100110011001100000011000000111111001100111111001111110000000000000011001111110011111100111111000000110011001111110000001111110011001100000011'))
+    print(decode_morse(decode_bits('1100110011001100000011000000111111001100111111001111110000000000000011001111110011111100111111000000110011001111110000001111110011001100000011')))
     print('should equal: ', 'HEY JUDE')
     
 if __name__ == '__main__':
