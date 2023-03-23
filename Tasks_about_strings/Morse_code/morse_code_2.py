@@ -21,8 +21,8 @@ def get_one(one, step):
 
 def decode_bits(bits):
     # ToDo: Accept 0's and 1's, return dots, dashes and spaces
-    ones, zeros = re.findall(r'[1]{1,}', bits), re.findall(r'[0]{1,}', bits)
-    ones_len, zeros_len = [len(x) for x in ones], [len(x) for x in zeros]
+    bits = bits.strip('0')
+    ones_len, zeros_len = [len(x) for x in re.findall(r'[1]{1,}', bits)], [len(x) for x in re.findall(r'[0]{1,}', bits)]
     if sum(ones_len + zeros_len) != len(bits):
         raise ValueError('got not only ones and zeros')
     step = min(ones_len + zeros_len)
