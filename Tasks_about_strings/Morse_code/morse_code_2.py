@@ -1,4 +1,4 @@
-''' my solution to KATA: '''
+''' my solution to KATA: https://www.codewars.com/kata/54b72c16cd7f5154e9000457/'''
 
 import re
 
