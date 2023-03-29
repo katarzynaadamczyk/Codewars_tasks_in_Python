@@ -54,6 +54,7 @@ def decodeBitsAdvanced(bits):
         return bits
     # new code including KMeans algorithm
     data = np.array(list(set(ones_len + zeros_len))).reshape(-1, 1)
+   # data = np.array(list(ones_len + zeros_len)).reshape(-1, 1)
     inertias = []
 
     for i in range(1, 4):
@@ -62,11 +63,13 @@ def decodeBitsAdvanced(bits):
         inertias.append(kmeans.inertia_)
         if kmeans.inertia_ == 0.0:
             break
-    
+    print(set(ones_len))
+    print(set(zeros_len))
     no_of_clusters = inertias.index(min(inertias)) + 1
     kmeans = KMeans(n_clusters=no_of_clusters)
     kmeans.fit(data)
     clusters_dict = get_dict_of_clusters(kmeans.cluster_centers_.tolist())
+    print(kmeans.cluster_centers_)
     ones_len_prediction = get_ones(clusters_dict, kmeans.predict(np.array(ones_len).reshape(-1, 1)))
     zeros_len_prediction = get_zeros(clusters_dict, kmeans.predict(np.array(zeros_len).reshape(-1, 1))) if len(zeros_len) > 0 else []
     
