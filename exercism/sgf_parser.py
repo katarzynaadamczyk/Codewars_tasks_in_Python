@@ -92,7 +92,6 @@ def parse_children(input_string):
     children = []
     no_brackets, no_square_brackets, first_index, index, last_semicolon = 0, 0, 0, 0, False
     while index < len(input_string):
-        print(no_brackets, no_square_brackets)
         if input_string[index] == ';':
             no_brackets += 1 if last_semicolon else -1
             last_semicolon = not last_semicolon 
