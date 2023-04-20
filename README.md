@@ -18,6 +18,7 @@ Some interesting tasks I found and solved them using Python 3. This project is u
 * [Tasks_about_graphs](#Tasks_about_graphs)
 * [Tasks_about_strings](#Tasks_about_strings)
 * [Weird_prime_generator](#Weird_prime_generator)
+* [Newest_solutions](#Newest_solutions)
 
 ## Technologies:
 * Python 3.9
@@ -80,6 +81,7 @@ Solution to problems regarding arrays.
 * smoke_signals - my solution to problem found on: https://www.codewars.com/kata/62a3855fcaec090025ed2a9a
 * Spiralize - my solution to problem found on: https://www.codewars.com/kata/534e01fbbb17187c7e0000c6/
 * TheMillionthFibonacci - my solution to problem found on: https://www.codewars.com/kata/53d40c1e2f13e331fc000c26
+* TheBee - my solution to problem: https://www.codewars.com/kata/6408ba54babb196a61d66a65
 * two_sum - my solution to problem found on: https://leetcode.com/problems/two-sum/
 
 ## Tasks_about_graphs:
@@ -91,7 +93,10 @@ Solutions to problems with graphs.
 Solutions to problems with strings.
 * break_a_palindrome - Given a palindromic string of lowercase English letters palindrome, replace exactly one character with any lowercase English letter so that the resulting string is not a palindrome and that it is the lexicographically smallest one possible
 * burrows_wheeler_transformation - Solution to following problem found on Codewars: https://www.codewars.com/kata/54ce4c6804fcc440a1000ecb
+* decode_int - my solution to task: https://www.codewars.com/kata/566859a83557837d9700001a
+* excel_sheet - my solution to task: https://www.codewars.com/kata/55ee3ebff71e82a30000006a
 * find_first_unique_letter - find the most efficient way to find the first unique letter in given string
+* morse_code - my solutions to tasks https://www.codewars.com/kata/54b72c16cd7f5154e9000457 and https://www.codewars.com/kata/54acd76f7207c6a2880012bb
 * moves_in_squared_strings - my solution to following problem found on Codewars: https://www.codewars.com/kata/56dbe7f113c2f63570000b86
 * nico - my solution to problem found on Codewars: https://www.codewars.com/kata/5968bb83c307f0bb86000015
 * Play_with_two_strings - Solution to following problem found on Codewars: https://www.codewars.com/kata/56c30ad8585d9ab99b000c54
@@ -102,3 +107,11 @@ Solutions to problems with strings.
 
 ## Weird_prime_generator
 Solution to following problem found on Codewars: https://www.codewars.com/kata/562b384167350ac93b00010c
+
+
+## Newest_solutions
+march 2023:
+* decode_int (done)
+* excel_sheet (done)
+* morse_code (in progress)
+* TheBee (in progress)
