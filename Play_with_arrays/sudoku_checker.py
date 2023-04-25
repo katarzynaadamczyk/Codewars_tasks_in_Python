@@ -1,17 +1,15 @@
 ''' my solution to problem: https://www.codewars.com/kata/63d1bac72de941033dbf87ae/ '''
 
-def validate_sudoku(board):
+def validate_rows(board):
     for row in board:
         row_set = set(row)
         if len(row_set) != 9 or min(row_set) != 1 or max(row_set) != 9:
             return False
-    for column in [[row[i] for row in board] for i in range(len(board))]:
-        row_set = set(row)
-        if len(row_set) != 9 or min(row_set) != 1 or max(row_set) != 9:
-            return False
-    for square in []:
-        pass
     return True
+
+def validate_sudoku(board):
+    return len(board) == 9 and validate_rows(board) and validate_rows([[row[i] for row in board] for i in range(len(board))]) \
+        and validate_rows([board[i][j:j+3] + board[i+1][j:j+3] + board[i+2][j:j+3] for j in range(0, len(board), 3) for i in range(0, len(board), 3)])
 
 def main():
     # tests
@@ -180,10 +178,10 @@ def main():
 				  [7,8,9,1,2,3,4,5,6]], False)]  # valid boxes and rows, repeats in cols
     
     
-    print(validate_sudoku([]), 'should be', False)
+    print(False, '->', validate_sudoku([]))
     
-    for board, expected in fixed_boards:
-        print(validate_sudoku(board), 'should be', expected)
+    for board, expected in sorted(fixed_boards, key=lambda x: x[1]):
+        print(expected, '->', validate_sudoku(board))
 
 if __name__ == '__main__':
     main()
