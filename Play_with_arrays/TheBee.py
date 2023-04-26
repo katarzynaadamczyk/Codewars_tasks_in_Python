@@ -12,18 +12,13 @@ def the_bee(n):
             tmp.append(tmp[-1] + data[-1][y] + data[-1][y + 1])
         tmp.append(tmp[-1] + data[-1][-1])
         data.append(tmp)
-    
-  #  for line in data:
-  #      print(line)
-    
+
     # decreasing columns
     for i in range(1, n):
         tmp = [sum(data[-1][:2])]
         for y in range(len(data[-1]) - 2):
             tmp.append(tmp[-1] + sum(data[-1][y + 1:y + 3]))
         data.append(tmp)
-    
-    
     
     return data[-1][-1]
 
