@@ -13,6 +13,7 @@ def measure(bucket_one, bucket_two, goal, start_bucket):
         raise ValueError('goal bigger than buckets')    
     if goal % gcd(bucket_one, bucket_two) != 0:
         raise ValueError('cannot reach target')
+    # TODO
     return (0, "one", 0)
 
 def main():
