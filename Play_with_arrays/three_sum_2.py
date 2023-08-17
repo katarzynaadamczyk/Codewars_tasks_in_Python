@@ -11,7 +11,7 @@ from typing import List
 class Solution:
     def num_generator(self, starting_index: int, nums_limit: int):
         for index, num in enumerate(self.sorted_unique_nums[starting_index:]):
-            for dup in range(1, min(self.nums_dict[num], nums_limit) + 1):
+            for dup in range(min(self.nums_dict[num], nums_limit), 0, -1):
                 yield [num] * dup, starting_index + index + 1
     
     # yields triplets that sum to 0
@@ -19,19 +19,19 @@ class Solution:
         for value_1, index_1 in self.num_generator(0, 3):
             if len(value_1) == 3 and sum(value_1) == 0:
                 yield value_1
-            if sum(value_1) > 0:
+            if sum(value_1) >= 0:
                 break
             if len(value_1) < 3:
                 for value_2, index_2 in self.num_generator(index_1, 3 - len(value_1)):
                     if len(value_1 + value_2) == 3 and sum(value_1 + value_2) == 0:
                         yield value_1 + value_2
-                    if sum(value_1 + value_2) > 0:
+                    if sum(value_1 + value_2) >= 0:
                         break
                     if len(value_1 + value_2) < 3:
                         for value_3, index_3 in self.num_generator(index_2, 1):
                             if len(value_1 + value_2 + value_3) == 3 and sum(value_1 + value_2 + value_3) == 0:
                                 yield value_1 + value_2 + value_3
-                            if sum(value_1 + value_2 + value_3) > 0:
+                            if sum(value_1 + value_2 + value_3) >= 0:
                                 break
     
     
