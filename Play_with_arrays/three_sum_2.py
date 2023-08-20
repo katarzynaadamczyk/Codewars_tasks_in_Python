@@ -1,8 +1,8 @@
 ''' 
 
-my solution to taks found on LeetCode:  
+my solution to taks found on LeetCode:  https://leetcode.com/problems/3sum/
 
-quicker solution
+slower solution
 
 '''
 
@@ -37,7 +37,7 @@ class Solution:
     
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         self.sorted_unique_nums = sorted(list(set(nums)))
-        self.nums_dict = {x: nums.count(x) for x in self.sorted_unique_nums}
+        self.nums_dict = {x: min(nums.count(x), 3) for x in self.sorted_unique_nums}
         return sorted([triple for triple in self.three_generator()])
     
 def main():

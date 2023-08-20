@@ -1,4 +1,4 @@
-''' my solution to taks found on LeetCode:  '''
+''' my solution to taks found on LeetCode: https://leetcode.com/problems/3sum/ '''
 
 from typing import List
 
