@@ -11,13 +11,10 @@ class Solution:
         act_array, min_val = [], len(nums) + 1
         for num in nums:
             act_array.append(num)
-            print(act_array)
-            while sum(act_array) > target:
+            while sum(act_array) >= target:
+                if len(act_array) < min_val:
+                    min_val = len(act_array)
                 del act_array[0]
-                print(act_array)
-            if sum(act_array) == target and len(act_array) < min_val:
-                min_val = len(act_array)
-            print(act_array)
         return min_val if min_val <= len(nums) else 0
     
 def main():
