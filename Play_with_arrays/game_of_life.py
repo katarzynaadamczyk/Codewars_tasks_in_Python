@@ -13,12 +13,9 @@ class Solution:
         setXY = set()
         for y in range(m):
             for x in range(n):
-               # print([sum(board[i][max(0, x - 1):x+1]) for i in range(max(0, y-1), min(y+2, m))])
                 actSum = sum([sum(board[i][max(0, x - 1):min(x+2, n)]) for i in range(max(0, y-1), min(y+2, m))]) - board[y][x]
                 if (board[y][x] == 1 and actSum not in [2, 3]) or (board[y][x] == 0 and actSum == 3):
                     setXY.add((x, y))
-                    print(actSum, board[y][x])
-                    print(x, y)
         return setXY            
             
     
