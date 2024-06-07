@@ -11,6 +11,8 @@ class Solution:
         if sum(gas) < sum(cost) or sum(gas) <= 0:
             return -1
         self.n = len(gas)
+        if self.n == 1:
+            return 0
         # prepare list gas[i] - cost[i]
         self.gas_minus_cost = [g - c for g, c in zip(gas, cost)]
         # find first non-minus value 
@@ -75,7 +77,6 @@ class Solution:
 # tests
 def main():
     sol = Solution()
-    '''
     # test 1
     gas = [1,2,3,4,5] 
     cost = [3,4,5,1,2]
@@ -103,7 +104,6 @@ def main():
     cost = [5,9,1,2,5]
     print(sol.canCompleteCircuit(gas, cost), 'should equal 3')
     
-   '''
     # test 6
     with open('play_with_arrays/tests/gas2.txt') as myfile:
         line = myfile.readline()
