@@ -27,30 +27,26 @@ class Solution_1:
 # second try
 class Solution_2:
     def maxProfit(self, prices: List[int]) -> int:
-        act_min, act_max, min_indexes, max_indexes = 0, 0, [], []
-        for i, val in enumerate(prices[1:], start=1):
-            if val >= prices[i-1]:
-                act_max = i
-                if act_min == i - 1:
-                    min_indexes.append(act_min)
-            elif val <= prices[i-1]:
-                act_min = i
-                if act_max == i - 1:
-                    max_indexes.append(act_max)
-        else:
-            if len(prices) - 1 == act_max:
-                max_indexes.append(act_max)
-            else:
-                min_indexes.append(act_min)
-                
-        while len(max_indexes) and len(min_indexes) and max_indexes[0] < min_indexes[0]:
-            max_indexes = max_indexes[1:]
+        # first part -> change prices to ups and downs lists
+        # after each downs[i] is ups[i], then downs[i+1], then ups[i+1]
+        print(prices)
+        ups, downs = [], []
+        index, prices_len = 0, len(prices) - 1
+        while index < prices_len:
+            while index < prices_len and prices[index] >= prices[index + 1]:
+                index += 1
+            downs.append(prices[index])
+            while index < prices_len and prices[index] <= prices[index + 1]:
+                index += 1
+            ups.append(prices[index])
+
+        print(downs)
+        print(ups)
+
+        # second part - count left and right mins / maxes simultaneously
+        lefts, rights = [], []
         
-        if len(min_indexes) > len(max_indexes):
-            min_indexes = min_indexes[:-1]
-            
-        print(min_indexes)
-        print(max_indexes)
+
         return 0
         
 def main():
@@ -69,7 +65,7 @@ def main():
     # test 3
     prices = [7,6,4,3,1]
     print(sol.maxProfit(prices), 'should equal 0')
-    
+    '''
     # test 4
     prices = [414,863,393,674,205,793,229,379,37,455,594,36,312,667,441,411,514,344,681,359,865,124,984,670,509,337,495,266,275,356,26,229,51,557,292,975,551,985,445,710,467,31,\
 890,694,127,349,631,322,595,59,433,173,944,305,662,379,864,835,355,411,506,10,716,918,872,716,887,453,706,416,245,611,6,403,894,94,852,733,890,131,481,723,571,335,\
@@ -146,7 +142,7 @@ def main():
               9037,9036,9035]
     print(sol.maxProfit(prices), 'should equal ?')
     print(prices[960:970])
-    
+    '''
     # test 6
     prices = [1,2,3,2,1,2,3,2,1]
     print(sol.maxProfit(prices), 'should equal ?')

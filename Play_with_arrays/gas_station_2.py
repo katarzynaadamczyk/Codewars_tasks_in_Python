@@ -15,20 +15,11 @@ class Solution:
             return 0
         # prepare list gas[i] - cost[i]
         self.gas_minus_cost = [g - c for g, c in zip(gas, cost)]
-        # look for starting index to search for max subarray sum
-       # k = 0 # first non-minus value index
-        # decide if move clockwise or counterclockwise
-      #  if self.gas_minus_cost[0] >= 0:
-            # search counterclockwise
-      #      while self.gas_minus_cost[k] >= 0 and (k - 1) % self.n != 0:
-       #         k -= 1
-       #     k = k % self.n
         # find max subarray sum and its starting index
         max_index, act_max_index = 0, 0
         max_ending_here = 0
         max_so_far = min(self.gas_minus_cost)
         
-     #   print(self.n, k)
         for i in range(2 * self.n):
             max_ending_here += self.gas_minus_cost[i % self.n]
             if max_ending_here < 0:
@@ -40,10 +31,6 @@ class Solution:
         if max_so_far > 0:
             return max_index % self.n
         
-
-
-
-
         return -1
 
 
