@@ -44,10 +44,31 @@ class Solution_2:
         print(ups)
 
         # second part - count left and right mins / maxes simultaneously
-        lefts, rights = [], []
-        
+        downs_len = len(downs)
+        # to retain max values so far
+        max_lefts, max_rights = [ups[0] - downs[0]], [ups[-1] - downs[-1]]
+        # to retain min lowest value from downs on max upper values from ups table
+        min_downs, max_uppers = [downs[0]], [ups[-1]]
+        for i in range(1, downs_len):
+            min_downs.append(min(min_downs[-1], downs[i]))
+            max_lefts.append(max(max_lefts[-1], ups[i] - min_downs[-1]))
 
-        return 0
+            max_uppers.insert(0, max(max_uppers[0], ups[downs_len - i - 1]))
+            max_rights.insert(0, max(max_rights[0], max_uppers[0] - downs[downs_len - i - 1]))
+
+        # adding starting and ending 0's
+        max_lefts.insert(0, 0)
+        max_rights.append(0)
+
+        # count total max
+        act_max = 0
+        for left, right in zip(max_lefts, max_rights):
+            if left + right > act_max:
+                act_max = left + right
+
+
+
+        return act_max
         
 def main():
     sol = Solution_2()
@@ -65,7 +86,7 @@ def main():
     # test 3
     prices = [7,6,4,3,1]
     print(sol.maxProfit(prices), 'should equal 0')
-    '''
+    
     # test 4
     prices = [414,863,393,674,205,793,229,379,37,455,594,36,312,667,441,411,514,344,681,359,865,124,984,670,509,337,495,266,275,356,26,229,51,557,292,975,551,985,445,710,467,31,\
 890,694,127,349,631,322,595,59,433,173,944,305,662,379,864,835,355,411,506,10,716,918,872,716,887,453,706,416,245,611,6,403,894,94,852,733,890,131,481,723,571,335,\
@@ -142,7 +163,7 @@ def main():
               9037,9036,9035]
     print(sol.maxProfit(prices), 'should equal ?')
     print(prices[960:970])
-    '''
+    
     # test 6
     prices = [1,2,3,2,1,2,3,2,1]
     print(sol.maxProfit(prices), 'should equal ?')
