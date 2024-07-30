@@ -30,27 +30,35 @@ class Solution:
         # no solution if s is empty or s does not contain all characters from t
         if s == '' or not self.checkCounters(Counter(s), tCounter):
             return ''
+        # get starting min and max indexes
         minIndex, maxIndex = self.findMinMaxIndex(s, tCounter)
-        tLength = len(t)
+        # set min word to min - max indexes
         minWord = (minIndex, maxIndex)
-        iMin, iMax = minIndex, minIndex + tLength - 1
+        # set iterators
+        iMin, iMax = minIndex, minIndex + len(t) - 1
+        # get actual sCounter
         sCounter = Counter(s[iMin:iMax + 1])
-        while iMin < maxIndex - tLength + 1 and iMax < maxIndex:
-            print(iMin, iMax)
+        # main loop
+        while iMin < iMax and iMax < maxIndex:
+            # expand iMax so that all letters from t are coveres
             while iMax < maxIndex and not self.checkCounters(sCounter, tCounter):
                 iMax += 1
                 sCounter[s[iMax]] += 1
+            # check if actual word is shortest one    
             if self.checkCounters(sCounter, tCounter) and iMax - iMin < minWord[1] - minWord[0]:
                 minWord = (iMin, iMax)
-            while iMin < maxIndex - tLength and self.checkCounters(sCounter, tCounter):
+            # expand iMin so that one letter is missing
+            while iMin < iMax and self.checkCounters(sCounter, tCounter):
                 sCounter[s[iMin]] -= 1
                 iMin += 1
-         #   sCounter[iMin - 1] += 1
-            if self.checkCounters(sCounter, tCounter) and iMax - iMin < minWord[1] - minWord[0]:
-                minWord = (iMin, iMax)
-            sCounter[iMin - 1] -= 1
-
-            
+            # add missing letter to counter
+            sCounter[s[iMin - 1]] += 1
+            # check if it is smallest word
+            if self.checkCounters(sCounter, tCounter) and iMax - iMin + 1 < minWord[1] - minWord[0]:
+                minWord = (iMin - 1, iMax)
+            # remove letter from counter
+            sCounter[s[iMin - 1]] -= 1
+        # return min word
         return s[minWord[0]:minWord[1]+1]
 
 def main():
@@ -70,11 +78,15 @@ def main():
     # test 4
     s = "qdsvbyuipqxnhkbgqdgozelvapgcainsofnrfjzvawihgmpwpwnqcylcnufqcsiqzwhhhjchfmqmagkrexigytklnrdslmkniuurdwzikrwlxhcbgkjegwsvnvpzhamrwgjzekjobizbreexqqewmwubtjadlowhwhiarurvcsyvwcunsylgwhisrivezrmvzwwsqppuhnreqmtkkgrjozbhjwlkpzgqwejotylamcgeqzobihmwinduloecqmtoqcejcpmqusukulncsbabodxbtbeloxzgbesdveupyocuzryutyxjdulzvpklokspqkslqodqfhlgajatkxfntqorhzcxlwmdigoyxtrcccidnlyxidnevdveczbpwpugyjhveyxhcfkpqipboehjhcombrdzhyghjncnnzwpggezrvcfzjqjngvoyyqhwwohlsvarrpzavatrcasnqbazyrzxhivfydsqasjtjiteloxposdhtfgswhrfpomnteftyonjyiojxnznfeubjctijmnyaanwgsphieqhpgsoutbbxycjaxrklekogakpsbwdimkxvelpyosvmxgnuxzgejwmjgbehxhpmtohzbyxqsvepbrmzsufcqrnwttfscxgxlpxnpufirjxtdjuvfzzvqprlizelwmkjchwtcdbvpbosminsjpncehnmgtzegknkrmdvrhrgihywsoobdedhltvtmxzuhmeaakysrpybyzxqnouqszzfswahtzbanidoubilsgoqfnjubdmvclaxkaedbfeppj"
     t = "fjknwevk"
-    print('\'' + sol.minWindow(s, t) + '\'', 'should equal \'\'')
+    print('\'' + sol.minWindow(s, t) + '\'', 'should equal \'fzzvqprlizelwmkjchwtcdbvpbosminsjpncehnmgtzegk\'')
     # test 5
     s = "xeaifhaqslynbcwxncwgeezbrjorzyuwevejcecuscjvgfutkrcqxbromihlgcjnzpybwcxqeglknhgzyiqxljnyrvlazvnyklbgoywugjftrltrvlrgueeobsoandazqbigbgbhqgdjtycojtwfydtbvjekmejdirjlymvquybnyddjxaoxfkyatckijvlrnwcnjxfdxgtvjweiyvfdhefaipkrnviaunpfmukkcdhlcmwcjbgqhnsqfdhsasuwhjbtfmdhrluvzqykugcbtutyzdqcxkyevaxcodjhogdpwbzsjducxpdzsvbpizvfbtirwtzmzebyhcqqfmueczdwveofgjkhesbamaolgrlpvcfcqbhubmtythdzspizijbwlqjrjvgfznhprqmudfsyoxzimhhutjsebcykxgpywznnpbhuizuwythkbohwzzacbanyhewdfmsvpzryamuyhdkkurgvrjysjntqrrvxfnuvonvqbrqjvbvpucklligu"
     t = "xbnpukocakzqzuhdlxoga"
-    print('\'' + sol.minWindow(s, t) + '\'', 'should equal \'\'')
+    print('\'' + sol.minWindow(s, t) + '\'', 'should equal \'nsqfdhsasuwhjbtfmdhrluvzqykugcbtutyzdqcxkyevaxcodjhogdp\'')
+    # test 6
+    s = "acbdbaab"
+    t = "aabd"
+    print('\'' + sol.minWindow(s, t) + '\'', 'should equal \'dbaa\'')
 
 
 if __name__ == '__main__':

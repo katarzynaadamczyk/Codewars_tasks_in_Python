@@ -52,6 +52,7 @@ class Solution:
             del words
             words = new_words
         print(len(used_words))
+        print(last_word)
         return s[last_word[0]:last_word[1]+1]
     
     def moveCounterQueue(self, s: str, minIndex: int, maxIndex: int, tLength: int, tCounter: Counter) -> str:
@@ -90,8 +91,8 @@ class Solution:
             return ''
         minIndex, maxIndex = self.findMinMaxIndex(s, tCounter)
         tLength = len(t)
-        return self.moveCounterQueue(s, minIndex, maxIndex, tLength, tCounter)
-      #  return self.moveCounterDynamic(s, minIndex, maxIndex, tLength, tCounter)
+      #  return self.moveCounterQueue(s, minIndex, maxIndex, tLength, tCounter)
+        return self.moveCounterDynamic(s, minIndex, maxIndex, tLength, tCounter)
       #  return self.moveCounter(s, minIndex, maxIndex, tLength, tCounter)
 
 def main():
