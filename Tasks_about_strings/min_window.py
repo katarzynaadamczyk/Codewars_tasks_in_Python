@@ -2,6 +2,7 @@
 leetcode
 task: 76. Minimum Window Substring
 https://leetcode.com/problems/minimum-window-substring/description/
+long working solutions 
 '''
 
 from collections import Counter
@@ -91,7 +92,7 @@ class Solution:
         tLength = len(t)
         return self.moveCounterQueue(s, minIndex, maxIndex, tLength, tCounter)
       #  return self.moveCounterDynamic(s, minIndex, maxIndex, tLength, tCounter)
-       # return self.moveCounter(s, minIndex, maxIndex, tLength, tCounter)
+      #  return self.moveCounter(s, minIndex, maxIndex, tLength, tCounter)
 
 def main():
     sol = Solution()
