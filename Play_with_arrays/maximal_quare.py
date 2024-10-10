@@ -5,7 +5,6 @@ https://leetcode.com/problems/maximal-square
 
 '''
 from typing import List
-from queue import Queue
 
 class Solution:
     def maximalSquare(self, matrix: List[List[str]]) -> int:
@@ -26,9 +25,38 @@ class Solution:
                     self.max_val = max(dp_table[i][j], self.max_val)
 
         return self.max_val ** 2
+    
+class Solution2:
+    def maximalSquare(self, matrix: List[List[str]]) -> int:
+        # returning if table does not exist or is empty
+        if matrix is None or len(matrix) < 1:
+            return 0
+        # create dp_table
+        dp_table = [[int(x) for x in matrix[0]]]
+        # keep in mind max length of square side
+        self.max_val = max(dp_table[0])
+        # save m & n values to variables
+        rows, cols = len(matrix), len(matrix[0])
+        # proceed on dp table
+        for i in range(1, rows):
+            tmp = [int(matrix[i][0])]
+            self.max_val = max(tmp[-1], self.max_val)
+            for j in range(1, cols):
+                if matrix[i][j] == '1':
+                    print(tmp)
+                    print(dp_table[-1][j-1])
+                    print(j)
+                    print(dp_table[-1][j])
+                    tmp.append(min(tmp[-1], dp_table[-1][j-1], dp_table[-1][j]) + 1)
+                    self.max_val = max(tmp[-1], self.max_val)
+                else:
+                    tmp.append(0)
+            dp_table.append(tmp)
+
+        return self.max_val ** 2
 
 def main():
-    sol = Solution()
+    sol = Solution2()
     # test 1
     rectangle = [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]
     print(sol.maximalSquare(rectangle), 'should equal 4')
