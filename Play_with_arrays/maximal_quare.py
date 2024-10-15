@@ -43,10 +43,6 @@ class Solution2:
             self.max_val = max(tmp[-1], self.max_val)
             for j in range(1, cols):
                 if matrix[i][j] == '1':
-                    print(tmp)
-                    print(dp_table[-1][j-1])
-                    print(j)
-                    print(dp_table[-1][j])
                     tmp.append(min(tmp[-1], dp_table[-1][j-1], dp_table[-1][j]) + 1)
                     self.max_val = max(tmp[-1], self.max_val)
                 else:
