@@ -18,7 +18,7 @@ class Solution:
             for j in range(1, k):
                 buy[j] = min(buy[j], price - sell[j-1])
                 sell[j] = max(sell[j], price - buy[j])
-
+                
         return sell[-1]
 
 def main():
